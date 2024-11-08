@@ -13,11 +13,6 @@ const routes = [
       name: "Home",
     },
     {
-      path: "/competision",
-      component: Competision,
-      name: "Competision",
-    },
-    {
       path: "/de-thi-dgnl",
       component: LayoutDeThi,
       children : [
