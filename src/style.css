@@ -32,3 +32,29 @@ html{
 .cart-dgnl:hover .text-title{
     color: #FF792F;
 }
+
+.bg-custom_1{
+    background: linear-gradient(180deg, #ffdb5e 32.29%, #e99a00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.list_exam:before{
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    background: #FF792F;
+    left: 50%;
+    z-index: 2;
+}
+.list_exam:after{
+    content: "";
+    position: absolute;
+    width: 15px;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+    border-bottom: 1px solid #d0d6e1;
+}
