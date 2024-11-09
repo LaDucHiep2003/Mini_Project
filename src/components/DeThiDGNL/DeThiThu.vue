@@ -6,7 +6,7 @@
             đề thi lớn giúp bạn chuẩn bị tốt cho kì thi ĐGNL.</div>
     </div>
         <div class="grid grid-cols-4 justify-center items-center">
-            <RouterLink to="/de-thi-dgnl/1" class="shadow-shadow-1 cart-dgnl p-4 rounded-2xl transition-all duration-300 w-[270px] h-[320px] mt-8 mb-auto mx-auto mr-0 hover:translate-y-[-16px] hover:shadow-shadow-2">
+            <RouterLink to="/de-thi-dgnl/de-thi-dgnl-dhqg-ha-noi" class="shadow-shadow-1 cart-dgnl p-4 rounded-2xl transition-all duration-300 w-[270px] h-[320px] mt-8 mb-auto mx-auto mr-0 hover:translate-y-[-16px] hover:shadow-shadow-2">
                 <div>
                     <img src="https://hocaz.vn/_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Fhocthongminhs.appspot.com%2Fprod%2F2023%2F02%2F22%2F90887829.png&w=1920&q=75" alt="Image">
                     <div class="mt-5">

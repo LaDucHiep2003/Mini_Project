@@ -15,7 +15,8 @@ export default {
         "color-6" : "#fff7f2",
         "color-7" : '#e9e9e9',
         "color-8" : "#333333",
-        "color-9" : "#535353"
+        "color-9" : "#535353",
+        "color-10" : "#0465d8"
       },
       boxShadow : {
         "shadow-1" : "0px 6px 12px 0 rgba(0, 0 ,0 , 0.078)",
