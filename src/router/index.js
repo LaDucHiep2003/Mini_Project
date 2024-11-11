@@ -6,6 +6,7 @@ import DeThiDGNL from "@/pages/DeThiDGNL/DeThiDGNL.vue";
 import BoDeThi from "@/pages/BoDeThi/BoDeThi.vue";
 import LayoutDeThi from "@/components/DeThiDGNL/LayoutDeThi.vue";
 import ThongTinDeThi from "@/pages/ThongTinDeThi/ThongTinDeThi.vue";
+import LamBaiThi from "@/pages/LamBaiThi.vue";
 const routes = [
     {
       path: "/",
@@ -32,6 +33,11 @@ const routes = [
           name: "thong-tin-de-thi",
         }
       ]
+    },
+    {
+        path: "/luyen-tap",
+        component: LamBaiThi,
+        name: "lambaithi",
     },
 ]
 

@@ -58,3 +58,17 @@ html{
     z-index: 1;
     border-bottom: 1px solid #d0d6e1;
 }
+
+.line-list-question:before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 70%;
+    height: 8px;
+    background : #ddd;
+    border-radius: 50px;
+}
+.scroll-w-none{
+    scrollbar-width: none;
+}
