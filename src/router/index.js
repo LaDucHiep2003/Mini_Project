@@ -1,13 +1,14 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import Home from "@/pages/Home/Home.vue"
-import Competision from "@/pages/Competision/Competision.vue";
 import DeThiDGNL from "@/pages/DeThiDGNL/DeThiDGNL.vue";
 import BoDeThi from "@/pages/BoDeThi/BoDeThi.vue";
 import LayoutDeThi from "@/components/DeThiDGNL/LayoutDeThi.vue";
 import ThongTinDeThi from "@/pages/ThongTinDeThi/ThongTinDeThi.vue";
 import LamBaiThi from "@/pages/LamBaiThi.vue";
 import TamDung from "@/components/LamBaiThi/TamDung.vue";
+import KetQua from "@/components/LamBaiThi/KetQua.vue";
+import DashBoard from "@/pages/Admin/DashBoard.vue";
 const routes = [
     {
       path: "/",
@@ -44,7 +45,26 @@ const routes = [
         path: '/stop',
         component: TamDung,
         name : 'stop'
-    }
+    },
+    {
+        path: '/ket-qua',
+        component: KetQua,
+        name : 'ket-qua'
+    },
+    {
+        path: '/admin',
+        name : 'admin',
+        meta:{
+            layout: 'admin'
+        },
+        children: [
+            {
+                path: 'dashboard',
+                component: DashBoard,
+                name : 'dashboard'
+            },
+        ]
+    },
 ]
 
 

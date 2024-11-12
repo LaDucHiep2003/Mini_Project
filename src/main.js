@@ -7,6 +7,7 @@ import 'element-plus/dist/index.css'
 import ElementPlus from 'element-plus'
 import { OhVueIcon, addIcons } from "oh-vue-icons";
 import * as FaIcons from "oh-vue-icons/icons/fa";
+import 'remixicon/fonts/remixicon.css'
 
 const Fa = Object.values({ ...FaIcons });
 addIcons(...Fa);

@@ -9,7 +9,7 @@
                 <div class="flex gap-10 text-base font-semibold items-center">
                     <div class="block p-0">
                         <RouterLink :to="{ name : 'de-thi-dgnl'}">
-                            <div class="p-3 flex nav  items-center">
+                            <div class="p-3 flex nav items-center transition-all duration-300" :class="{ 'text-color-2': $route.name === 'de-thi-dgnl' }">
                                 <span class="transition-all duration-500">Đề thi ĐGNL</span>
                             </div>
                         </RouterLink>
