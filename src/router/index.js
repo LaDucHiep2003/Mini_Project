@@ -7,6 +7,7 @@ import BoDeThi from "@/pages/BoDeThi/BoDeThi.vue";
 import LayoutDeThi from "@/components/DeThiDGNL/LayoutDeThi.vue";
 import ThongTinDeThi from "@/pages/ThongTinDeThi/ThongTinDeThi.vue";
 import LamBaiThi from "@/pages/LamBaiThi.vue";
+import TamDung from "@/components/LamBaiThi/TamDung.vue";
 const routes = [
     {
       path: "/",
@@ -37,8 +38,13 @@ const routes = [
     {
         path: "/luyen-tap",
         component: LamBaiThi,
-        name: "lambaithi",
+        name: "lambaithi"
     },
+    {
+        path: '/stop',
+        component: TamDung,
+        name : 'stop'
+    }
 ]
 
 

@@ -5,9 +5,9 @@
     <div class="text-sm font-medium line-list-question relative flex justify-end items-center mt-6">0/150</div>
 
     <div>
-      <div class="flex gap-2 flex-wrap px-2 mt-3 max-h-12 overflow-scroll scroll-w-none">
+      <div class="flex gap-2 flex-wrap px-2 mt-3 max-h-52 overflow-scroll scroll-w-none">
         <div class="w-7 h-7 bg-gray-200 flex justify-center items-center rounded-lg text-sm font-semibold">1</div>
-        <div class="w-7 h-7 bg-gray-200 flex justify-center items-center rounded-lg text-sm font-semibold text-color-4">2</div>
+        <div class="w-7 h-7 bg-gray-200 flex justify-center items-center rounded-lg text-sm font-semibold text-white bg-color-3">2</div>
         <div class="w-7 h-7 bg-gray-200 flex justify-center items-center rounded-lg text-sm font-semibold text-color-4">1</div>
         <div class="w-7 h-7 bg-gray-200 flex justify-center items-center rounded-lg text-sm font-semibold text-color-4">1</div>
         <div class="w-7 h-7 bg-gray-200 flex justify-center items-center rounded-lg text-sm font-semibold text-color-4">1</div>
@@ -25,8 +25,84 @@
         <div class="w-7 h-7 bg-gray-200 flex justify-center items-center rounded-lg text-sm font-semibold text-color-4">1</div>
         <div class="w-7 h-7 bg-gray-200 flex justify-center items-center rounded-lg text-sm font-semibold text-color-4">1</div>
       </div>
+      <div @click="openModal" class="border border-color-5 rounded-2xl mt-3 py-1 cursor-pointer">
+        <button  class="text-[15px] text-color-4 font-semibold">Tạm dừng</button>
+      </div>
+      <div class="border border-color-3 rounded-2xl mt-2 py-1 bg-color-3">
+        <button class="text-[15px] text-white font-semibold">Nộp bài</button>
+      </div>
     </div>
   </div>
+
+<TransitionRoot appear :show="isOpen" as="template">
+  <Dialog as="div" @close="closeModal" class="relative z-10">
+    <TransitionChild
+        as="template"
+        enter="duration-300 ease-out"
+        enter-from="opacity-0"
+        enter-to="opacity-100"
+        leave="duration-200 ease-in"
+        leave-from="opacity-100"
+        leave-to="opacity-0"
+    >
+      <div class="fixed inset-0 bg-black/25" />
+    </TransitionChild>
+
+    <div class="fixed inset-0 overflow-y-auto">
+      <div
+          class="flex min-h-full items-center justify-center p-4 text-center relative"
+      >
+        <TransitionChild
+            as="template"
+            enter="duration-300 ease-out"
+            enter-from="opacity-0 scale-95"
+            enter-to="opacity-100 scale-100"
+            leave="duration-200 ease-in"
+            leave-from="opacity-100 scale-100"
+            leave-to="opacity-0 scale-95"
+        >
+          <DialogPanel
+              class="w-full max-w-xl transform overflow-hidden rounded-2xl bg-white px-5 pt-5 pb-3 text-left align-middle shadow-xl transition-all"
+          >
+            <DialogTitle
+                as="h3"
+                class="text-center text-2xl font-semibold text-color-8"
+            >
+              Tạm dừng
+            </DialogTitle>
+            <div class="mt-2">
+              <div class="text-base">Bạn có muốn tạm dừng không?</div>
+              <div class="flex justify-end items-center gap-2 mt-6">
+                <button @click="closeModal" class="w-[100px] h-9 bg-gray-300 rounded-lg text-base font-medium">Hủy</button>
+                <button class="w-[100px] h-9 bg-color-3 rounded-lg text-base font-medium text-white">Đồng ý</button>
+              </div>
+            </div>
+          </DialogPanel>
+        </TransitionChild>
+      </div>
+    </div>
+  </Dialog>
+</TransitionRoot>
 </template>
-<script setup lang="ts">
+
+
+<script setup>
+import { ref } from 'vue'
+import {
+  TransitionRoot,
+  TransitionChild,
+  Dialog,
+  DialogPanel,
+  DialogTitle,
+} from '@headlessui/vue'
+
+const isOpen = ref(false)
+
+function closeModal() {
+  isOpen.value = false
+}
+function openModal() {
+  isOpen.value = true
+}
+
 </script>

@@ -9,7 +9,7 @@
         <div class="text-sm font-bold text-green-500">03:00:00</div>
       </div>
       <div class="flex gap-5">
-          <div class="w-[75%]"></div>
+          <CauHoi />
           <BangCauHoi />
       </div>
     </div>
@@ -18,10 +18,12 @@
 
 <script>
   import BangCauHoi from "@/components/LamBaiThi/BangCauHoi.vue";
+  import CauHoi from "@/components/LamBaiThi/CauHoi.vue";
 
   export  default {
     components:{
-      BangCauHoi
+      BangCauHoi,
+      CauHoi
     }
   }
 </script>
