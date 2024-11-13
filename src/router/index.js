@@ -10,6 +10,7 @@ import TamDung from "@/components/LamBaiThi/TamDung.vue";
 import KetQua from "@/components/LamBaiThi/KetQua.vue";
 import DashBoard from "@/pages/Admin/DashBoard.vue";
 import DanhSachBaiThi from "@/pages/Admin/DanhSachBaiThi.vue";
+import ThemBaiThi from "@/pages/Admin/ThemBaiThi.vue";
 const routes = [
     {
       path: "/",
@@ -68,6 +69,11 @@ const routes = [
                 path: 'danh-sach-bai-thi',
                 component: DanhSachBaiThi,
                 name : 'danh-sach-bai-thi'
+            },
+            {
+                path: 'them-bai-thi',
+                component: ThemBaiThi,
+                name : 'them-bai-thi'
             },
         ]
     },

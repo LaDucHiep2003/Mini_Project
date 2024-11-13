@@ -1,4 +1,4 @@
-const API_DOMAIN = "http://localhost/php/shop_online/be/api/"
+const API_DOMAIN = "http://localhost:3000/"
 
 export const get = async (patch) => {
     const response = await fetch(API_DOMAIN + patch);

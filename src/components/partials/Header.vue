@@ -17,7 +17,7 @@
                     <div class="block p-0 relative item-menu">
                         <RouterLink to="/">
                             <div class="p-3 flex nav  items-center">
-                                <span class="transition-all duration-500">THCS</span>
+                                <span class="transition-all duration-500">THCS <i class="ri-arrow-down-s-line"></i></span>
                             </div>
                         </RouterLink>
                         <div class="w-[200px] bg-white absolute rounded shadow-shadow-1 z-[2] hidden navbar">
@@ -30,7 +30,7 @@
                     <div class="block p-0 relative item-menu">
                         <RouterLink to="/">
                             <div class="p-3 flex nav  items-center">
-                                <span class="transition-all duration-500">THPT</span>
+                                <span class="transition-all duration-500">THPT <i class="ri-arrow-down-s-line"></i></span>
                             </div>
                         </RouterLink>
                         <div class="w-[200px] bg-white absolute rounded shadow-shadow-1 z-[2] hidden navbar">

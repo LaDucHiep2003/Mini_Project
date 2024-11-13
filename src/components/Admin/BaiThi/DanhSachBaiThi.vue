@@ -4,104 +4,64 @@
     <div class="text-[50px] text-color-11 font-great text-center">
       Danh sách bài thi
     </div>
-    <div class="bg-color-white flex justify-between">
-      <RouterLink :to="{ name : 'Home'}">
-        <el-button type="primary" plain>Thêm bài thi</el-button>
-      </RouterLink>
+    <RouterLink :to="{ name : 'them-bai-thi'}">
+      <button class="min-h-9 w-[150px] border-2 border-green-700 font-semibold px-2 text-sm
+               rounded-md bg-color-2 text-white transition-all duration-500 hover:translate-y-[-6px]">Thêm bài thi</button>
+    </RouterLink>
+
+    <div class="pt-6">
+      <div class="bg-white rounded-[20px] overflow-hidden shadow-shadow-1">
+        <div class="text-center pt-6 ">
+          <div class="text-color-3 text-base font-semibold mb-1">Danh sách bài thi </div>
+          <div class="text-xl font-semibold text-color-2">Môn ĐHQG Hà Nội</div>
+          <div class="flex justify-between mt-6 p-3 bg-color-6">
+            <div class="text-sm font-semibold min-w-[70px]">Stt</div>
+            <div class="text-sm font-semibold min-w-[23%]">Tiêu đề</div>
+            <div class="text-sm font-semibold min-w-[23%]">Thời gian hết hạn</div>
+            <div class="text-sm font-semibold min-w-[15%]">Thời gian làm bài</div>
+            <div class="text-sm font-semibold min-w-[15%]">Số câu hỏi</div>
+            <div class="text-sm font-semibold min-w-[19%]">Hành động</div>
+          </div>
+        </div>
+        <div class="px-4">
+          <ul>
+            <li class="flex items-center py-3 text-sm border-b border-color-7 justify-between text-center">
+              <div class="min-w-5 px-6 bg-custom_1">1</div>
+              <div class="flex justify-center items-center text-center h-12 ml-4 mr-[10px] min-w-[23%] w-2/12">Địa Lý</div>
+              <div class="overflow-hidden line-clamp-1 overflow-ellipsis break-words text-center min-h-5 min-w-[23%]">2024-09-27 16:44:47</div>
+              <div class="px-1 min-w-[15%] break-words text-sm">120</div>
+              <div class="px-1 min-w-[15%] break-words text-sm">5</div>
+              <div class="px-1 break-words text-sm min-w-[19%]">
+                <div class="flex justify-center items-center gap-3">
+                  <button class="min-h-9 w-24 border-2 border-green-700 font-semibold px-2 text-sm
+                                rounded-lg bg-color-2 text-white transition-all duration-500 hover:translate-y-[-6px]">Sửa</button>
+                  <button class="min-h-9 w-24 border-2 border-color-3 text-white font-semibold bg-red-500 px-5 text-sm
+                                rounded-lg transition-all duration-500 hover:translate-y-[-6px]">Xóa</button>
+                </div>
+              </div>
+            </li>
+            <li class="flex items-center py-3 text-sm border-b border-color-7 justify-between text-center">
+              <div class="min-w-5 px-6 bg-custom_1">1</div>
+              <div class="flex justify-center items-center text-center h-12 ml-4 mr-[10px] min-w-[23%] w-2/12">Địa Lý</div>
+              <div class="overflow-hidden line-clamp-1 overflow-ellipsis break-words text-center min-h-5 min-w-[23%]">2024-09-27 16:44:47</div>
+              <div class="px-1 min-w-[15%] break-words text-sm">120</div>
+              <div class="px-1 min-w-[15%] break-words text-sm">5</div>
+              <div class="px-1 break-words text-sm min-w-[19%]">
+                <div class="flex justify-center items-center gap-3">
+                  <button class="min-h-9 w-24 border-2 border-green-700 font-semibold px-2 text-sm
+                                rounded-lg bg-color-2 text-white transition-all duration-500 hover:translate-y-[-6px]">Sửa</button>
+                  <button class="min-h-9 w-24 border-2 border-color-3 text-white font-semibold bg-red-500 px-5 text-sm
+                                rounded-lg transition-all duration-500 hover:translate-y-[-6px]">Xóa</button>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <div class="pt-8">
-  <!--    <div class="m-4">-->
-  <!--      <el-select-->
-  <!--          v-model="value"-->
-  <!--          value-key="id"-->
-  <!--          placeholder="Sắp xếp"-->
-  <!--          style="width: 240px"-->
-  <!--      >-->
-  <!--        <el-option-->
-  <!--            v-for="item in options"-->
-  <!--            :key="item.id"-->
-  <!--            :label="item.label"-->
-  <!--            :value="item"-->
-  <!--        />-->
-  <!--      </el-select>-->
-  <!--    </div>-->
-      <el-table :data="filterTableData">
-        <el-table-column type="selection" width="55" />
-        <el-table-column label="Title" prop="title" />
-        <el-table-column label="Position" prop="position" />
-        <el-table-column label="Status" prop="status">
-          <template #default="scope">
-            <el-button v-if="scope.row.status === 'active'" type="success" plain size="small" >Hoạt động</el-button>
-            <el-button v-else type="danger" plain size="small" >Dừng hoạt động</el-button>
-          </template>
-        </el-table-column>
-        <el-table-column align="right">
-          <template #header>
-            <el-input size="small" placeholder="Type to search" />
-          </template>
-          <template #default="scope">
-            <el-button size="small">
-              <RouterLink :to="`/admin/edit-category/${scope.row.id}`">
-                Edit
-              </RouterLink>
-            </el-button>
-            <el-button
-                size="small"
-                type="danger"
-            >
-              Delete
-            </el-button>
-          </template>
-        </el-table-column>
-      </el-table>
-    </div>
+
   </div>
 </template>
 
-<script lang="ts" setup>
-import { computed, ref } from 'vue'
-
-interface User {
-  date: string
-  name: string
-  address: string
-}
-
-const search = ref('')
-const filterTableData = computed(() =>
-    tableData.filter(
-        (data) =>
-            !search.value ||
-            data.name.toLowerCase().includes(search.value.toLowerCase())
-    )
-)
-const handleEdit = (index: number, row: User) => {
-  console.log(index, row)
-}
-const handleDelete = (index: number, row: User) => {
-  console.log(index, row)
-}
-
-const tableData: User[] = [
-  {
-    date: '2016-05-03',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-02',
-    name: 'John',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-04',
-    name: 'Morgan',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-01',
-    name: 'Jessy',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-]
+<script setup lang="ts">
 </script>
