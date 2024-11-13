@@ -3,7 +3,7 @@
   <div class="fixed left-0 top-0 w-64 h-full bg-gray-900 p-4 z-50 sidebar-menu transition-transform" :class="{ '-translate-x-full': isSidebarOpen }">
     <a href="#" class="flex items-center pb-4 border-b border-b-gray-800">
       <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded object-cover">
-      <span class="text-lg font-bold text-white ml-3">Admin</span>
+      <span class="text-lg font-semibold text-white ml-3">Giáo Viên</span>
     </a>
     <ul class="mt-4">
       <li class="mb-1 group active">
@@ -19,9 +19,9 @@
               <DisclosureButton
                   class="flex w-full justify-between items-center hover:bg-gray-950 hover:text-gray-100 rounded-md py-2 px-4"
               >
-                <RouterLink to="/" class="flex items-center text-gray-300  group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
+                <RouterLink :to="{ name : 'danh-sach-bai-thi'}" class="flex items-center text-gray-300  group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
                   <i class="ri-instance-line mr-3 text-lg"></i>
-                  <span class="text-sm">Order</span>
+                  <span class="text-sm">Danh Sách bài thi</span>
                 </RouterLink>
                 <i class="ri-arrow-up-s-line text-color-6" :class="open ? 'rotate-180 transform' : 'rotate-90 transform'"></i>
               </DisclosureButton>
@@ -29,13 +29,13 @@
 
                 <ul class="pl-7 mt-2 group-[.selected]:block">
                   <li class="mb-4">
-                    <RouterLink to="/" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Danh sách đơn hàng</RouterLink>
+                    <RouterLink :to="{ name : 'danh-sach-bai-thi'}" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Danh sách bài thi</RouterLink>
                   </li>
                   <li class="mb-4">
-                    <RouterLink to="/" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Đơn hàng đã xác nhận</RouterLink>
+                    <RouterLink to="/" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Tạo bài thi</RouterLink>
                   </li>
                   <li class="mb-4">
-                    <RouterLink to="/" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Đơn hàng đã hủy</RouterLink>
+                    <RouterLink to="/" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Bài thi đã xóa</RouterLink>
                   </li>
                 </ul>
 

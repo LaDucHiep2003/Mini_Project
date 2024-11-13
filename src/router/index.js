@@ -9,6 +9,7 @@ import LamBaiThi from "@/pages/LamBaiThi.vue";
 import TamDung from "@/components/LamBaiThi/TamDung.vue";
 import KetQua from "@/components/LamBaiThi/KetQua.vue";
 import DashBoard from "@/pages/Admin/DashBoard.vue";
+import DanhSachBaiThi from "@/pages/Admin/DanhSachBaiThi.vue";
 const routes = [
     {
       path: "/",
@@ -62,6 +63,11 @@ const routes = [
                 path: 'dashboard',
                 component: DashBoard,
                 name : 'dashboard'
+            },
+            {
+                path: 'danh-sach-bai-thi',
+                component: DanhSachBaiThi,
+                name : 'danh-sach-bai-thi'
             },
         ]
     },
