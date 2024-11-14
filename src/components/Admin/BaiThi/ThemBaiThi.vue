@@ -14,33 +14,31 @@
         <div class="mt-2 px-5 py-5">
           <div class="flex justify-between items-center gap-5 flex-wrap">
             <div class="w-4/5">
-              <label for="title" class="text-lg font-medium text-color-4">Tiêu đề</label>
-              <div class="w-full h-12 rounded-lg border border-color-7 py-4 px-3 flex items-center mt-2">
+              <label for="title" class="text-base font-medium text-color-4">Tiêu đề</label>
+              <div class="w-full h-10 rounded-lg border border-color-7 py-4 px-3 flex items-center mt-2">
                 <input placeholder="Nhập tiêu đề" id="title" class="outline-none ml-3 text-base w-full">
               </div>
             </div>
             <div class="flex-1">
-              <label for="totalQues" class="text-lg font-medium text-color-4">Số câu hỏi</label>
-              <div class="w-full h-12 rounded-lg border border-color-7 py-4 px-3 flex items-center mt-2">
+              <label for="totalQues" class="text-base font-medium text-color-4">Số câu hỏi</label>
+              <div class="w-full h-10 rounded-lg border border-color-7 py-4 px-3 flex items-center mt-2">
                 <input placeholder="Nhập số câu hỏi" id="totalQues" type="number" class="outline-none ml-3 text-base w-full">
               </div>
             </div>
             <div class="w-4/5">
-              <label for="title" class="text-lg font-medium text-color-4">Tiêu đề</label>
-              <div class="w-full h-12 rounded-lg border border-color-7 py-4 px-3 flex items-center mt-2">
-                <input placeholder="Nhập tiêu đề" id="title" class="outline-none ml-3 text-base w-full">
+              <label for="title" class="text-base font-medium text-color-4">Mô tả</label>
+              <div class="w-full h-10 rounded-lg border border-color-7 py-4 px-3 flex items-center mt-2">
+                <input placeholder="Nhập mô tả" id="title" class="outline-none ml-3 text-base w-full">
               </div>
             </div>
             <div class="flex-1">
-              <label for="totalQues" class="text-lg font-medium text-color-4">Thời gian làm bài (phút)</label>
-              <div class="w-full h-12 rounded-lg border border-color-7 py-4 px-3 flex items-center mt-2">
+              <label for="totalQues" class="text-base font-medium text-color-4">Thời gian làm bài (phút)</label>
+              <div class="w-full h-10 rounded-lg border border-color-7 py-4 px-3 flex items-center mt-2">
                 <input placeholder="Nhập số câu hỏi" id="totalQues" type="number" class="outline-none ml-3 text-base w-full">
               </div>
             </div>
           </div>
-
           <div class="w-full h-12 rounded-lg border border-color-7 py-4 px-3 flex items-center mt-5">
-            <v-icon name="fa-lock" scale="1.3" />
             <input placeholder="Nhập lại mật khẩu " class="outline-none ml-3 text-base flex-1">
           </div>
           <div class="px-1 break-words text-sm min-w-[19%] mt-6">

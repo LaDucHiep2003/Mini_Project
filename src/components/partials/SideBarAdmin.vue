@@ -49,7 +49,42 @@
           </div>
         </div>
       </li>
+      <li class="mb-1 group">
+        <div class="w-full ">
+          <div class="mx-auto w-full">
+            <Disclosure v-slot="{ open }">
+              <DisclosureButton
+                  class="flex w-full justify-between items-center hover:bg-gray-950 hover:text-gray-100 rounded-md py-2 px-4"
+                  :class="{ 'bg-gray-800 ': $route.name === 'danh-sach-danh-muc' }"
+              >
+                <RouterLink :to="{ name : 'danh-sach-danh-muc'}" class="flex items-center text-gray-300 ">
+                  <div>
+                    <i class="ri-instance-line mr-3 text-lg"></i>
+                    <span class="text-sm">Danh mục</span>
+                  </div>
+                </RouterLink>
+                <i class="ri-arrow-up-s-line text-color-6" :class="open ? 'rotate-180 transform' : 'rotate-90 transform'"></i>
+              </DisclosureButton>
+              <DisclosurePanel>
+                <ul class="pl-7 mt-2">
+                  <li class="mb-4">
+                    <RouterLink :to="{ name : 'danh-sach-danh-muc'}" class="text-gray-300 text-sm flex items-center hover:text-gray-100
+                       before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Danh sách danh mục</RouterLink>
+                  </li>
+                  <li class="mb-4">
+                    <RouterLink :to="{ name : 'them-danh-muc'}" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Tạo bài thi</RouterLink>
+                  </li>
+                  <li class="mb-4">
+                    <RouterLink to="/" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Bài thi đã xóa</RouterLink>
+                  </li>
+                </ul>
 
+              </DisclosurePanel>
+            </Disclosure>
+
+          </div>
+        </div>
+      </li>
 
     </ul>
   </div>

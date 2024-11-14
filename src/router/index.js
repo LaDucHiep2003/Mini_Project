@@ -11,6 +11,9 @@ import KetQua from "@/components/LamBaiThi/KetQua.vue";
 import DashBoard from "@/pages/Admin/DashBoard.vue";
 import DanhSachBaiThi from "@/pages/Admin/DanhSachBaiThi.vue";
 import ThemBaiThi from "@/pages/Admin/ThemBaiThi.vue";
+import DanhSachDanhMuc from "@/pages/Admin/DanhSachDanhMuc.vue";
+import ThemDanhMuc from "@/pages/Admin/ThemDanhMuc.vue";
+import SuaDanhMuc from "@/pages/Admin/SuaDanhMuc.vue";
 const routes = [
     {
       path: "/",
@@ -74,6 +77,21 @@ const routes = [
                 path: 'them-bai-thi',
                 component: ThemBaiThi,
                 name : 'them-bai-thi'
+            },
+            {
+                path: 'danh-sach-danh-muc',
+                component: DanhSachDanhMuc,
+                name : 'danh-sach-danh-muc'
+            },
+            {
+                path: 'them-danh-muc',
+                component: ThemDanhMuc,
+                name : 'them-danh-muc'
+            },
+            {
+                path: 'sua-danh-muc/:id',
+                component: SuaDanhMuc,
+                name : 'sua-danh-muc'
             },
         ]
     },
