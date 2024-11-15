@@ -105,10 +105,43 @@ export default {
   setup(){
     const listCategory = ref([]);
     const isOpen = ref(false)
+
+    const processTitles = (items) => {
+      // Tạo một map để truy cập nhanh dữ liệu dựa vào id
+      const map = new Map();
+
+      // Bước 1: Gán dữ liệu gốc vào map
+      items.forEach((item) => {
+        map.set(item.id, { ...item });
+      });
+
+      // Bước 2: Thêm '--' cho các mục có parentId
+      items.forEach((item) => {
+        let modifiedTitle = item.title;
+        let current = item;
+
+        // Duyệt qua các cha để thêm '--'
+        while (current.parentId) {
+          const parent = map.get(current.parentId);
+          if (parent) {
+            modifiedTitle = '-- ' + modifiedTitle;
+            current = parent; // Di chuyển lên cha
+          } else {
+            break; // Thoát nếu không tìm thấy cha
+          }
+        }
+        // Cập nhật tiêu đề đã sửa đổi vào map
+        map.set(item.id, { ...item, title: modifiedTitle });
+      });
+
+      // Trả về danh sách đã xử lý từ map
+      return Array.from(map.values());
+    };
+
     const loadCategorys = async () => {
       try {
         const result = await getCategorys(1);
-        listCategory.value = result.categorys.data;
+        listCategory.value = processTitles(result.categorys.data);
       } catch (err) {
         console.log(err.message);
       }
