@@ -19,3 +19,8 @@ export const deleteCategory = async (id) => {
     const result = await del(`deleteCategory/${id}`);
     return result;
 }
+
+export const editCategory = async (id, option) => {
+    const result = await patch(`editExamCategory/${id}`, option);
+    return result;
+}

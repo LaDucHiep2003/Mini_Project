@@ -26,7 +26,7 @@
           </div>
           <div class="px-1 break-words text-sm min-w-[19%] mt-6">
             <div class="flex justify-center items-center gap-6">
-              <button class="min-h-10 w-[160px] border-2 border-green-700 font-semibold px-2 text-base
+              <button @click="handleSubmit" class="min-h-10 w-[160px] border-2 border-green-700 font-semibold px-2 text-base
                                 rounded-lg bg-color-2 text-white transition-all duration-500 hover:translate-y-[-6px]">Xác nhận</button>
               <button class="min-h-10 w-[160px] border-2 border-color-3 text-white font-semibold bg-red-500 px-5 text-sm
                                 rounded-lg transition-all duration-500 hover:translate-y-[-6px]">Hủy</button>
@@ -40,7 +40,7 @@
 </template>
 <script>
 import {onMounted, ref} from "vue";
-import {getDetailCategory} from "@/service/CategoryService.js";
+import {editCategory, getDetailCategory} from "@/service/CategoryService.js";
 import {useRoute, useRouter} from "vue-router";
 
 export default {
@@ -68,9 +68,9 @@ export default {
 
     const handleSubmit = async () =>{
       try {
-        const result = await getDetailCategory(id);
+        const result = await editCategory(id, data.value);
         if(result){
-          data.value = result.data
+          router.push({ name : 'danh-sach-danh-muc'})
         }
       } catch (err) {
         console.log(err.message);
@@ -80,6 +80,7 @@ export default {
 
     return{
       data,
+      handleSubmit
     }
   }
 }

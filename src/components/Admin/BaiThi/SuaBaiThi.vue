@@ -3,11 +3,11 @@
 <template>
   <div class="p-10 mx-auto">
     <div class="text-[50px] text-color-11 font-great text-center">
-      Thêm bài thi
+      Sửa bài thi
     </div>
     <RouterLink :to="{ name : 'danh-sach-bai-thi'}">
-      <button class="min-h-9 w-[150px] border-2 border-green-700 font-semibold px-2 text-sm
-               rounded-md bg-color-2 text-white transition-all duration-500 hover:translate-y-[-6px]">Danh Sách bài thi</button>
+      <button class="min-h-9 border-2 border-green-700 font-semibold px-5 text-sm
+               rounded-md bg-color-2 text-white transition-all duration-500 hover:translate-y-[-6px]">Danh sách bài thi</button>
     </RouterLink>
     <div class="pt-6">
       <div class="bg-white rounded-[20px] shadow-shadow-1">
@@ -72,31 +72,33 @@
             <div class="flex justify-center items-center gap-6">
               <button @click="handleSubmit" class="min-h-10 w-[160px] border-2 border-green-700 font-semibold px-2 text-base
                                 rounded-lg bg-color-2 text-white transition-all duration-500 hover:translate-y-[-6px]">Xác nhận</button>
-              <button class="min-h-10 w-[160px] border-2 border-color-3 text-white font-semibold bg-red-500 px-5 text-sm
+              <button @click="handleCencel" class="min-h-10 w-[160px] border-2 border-color-3 text-white font-semibold bg-red-500 px-5 text-sm
                                 rounded-lg transition-all duration-500 hover:translate-y-[-6px]">Hủy</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-
   </div>
 </template>
-
-
 <script>
 import {onMounted, ref} from "vue";
 import {getCategorys} from "@/service/CategoryService.js";
-import {useRouter} from "vue-router";
-import {createExam} from "@/service/ExamService.js";
+import {useRoute, useRouter} from "vue-router";
+import {getDetailExam, editExam} from "@/service/ExamService.js";
+import { h } from 'vue'
+import { ElNotification } from 'element-plus'
 
 export default {
+  components:{ElNotification},
 
   setup(){
     const router = useRouter();
+    const route = useRoute();
     const options = ref([]);
 
-    // State để điều khiển dropdown và lưu lựa chọn
+    const id = route.params.id;
+
     const showDropdown = ref(false);
     const selectedOption = ref('');
 
@@ -114,65 +116,63 @@ export default {
       category : '',
       created_by : 1
     });
-    const handleSubmit = async () =>{
+
+    const loadData = async () =>{
       try {
-        const result = await createExam(data.value);
+        const result = await getDetailExam(id);
         if(result){
-          console.log("ok")
-          router.push({ name : 'danh-sach-bai-thi'})
+          data.value = result.data
+          selectedOption.value = result.data.category
+          console.log(result.data.category)
         }
       } catch (err) {
         console.log(err.message);
       }
-      console.log(data.value)
     }
 
-    const processTitles = (items) => {
-      // Tạo một map để truy cập nhanh dữ liệu dựa vào id
-      const map = new Map();
-      // Bước 1: Gán dữ liệu gốc vào map
-      items.forEach((item) => {
-        map.set(item.id, { ...item });
-      });
-      // Bước 2: Thêm '--' cho các mục có parentId
-      items.forEach((item) => {
-        let modifiedTitle = item.title;
-        let current = item;
-        // Duyệt qua các cha để thêm '--'
-        while (current.parentId) {
-          const parent = map.get(current.parentId);
-          if (parent) {
-            modifiedTitle = '-- ' + modifiedTitle;
-            current = parent; // Di chuyển lên cha
-          } else {
-            break; // Thoát nếu không tìm thấy cha
-          }
-        }
-        // Cập nhật tiêu đề đã sửa đổi vào map
-        map.set(item.id, { ...item, title: modifiedTitle });
-      });
-      // Trả về danh sách đã xử lý từ map
-      return Array.from(map.values());
-    };
     const loadCategorys = async () => {
       try {
         const result = await getCategorys(1);
-        options.value = processTitles(result.categorys.data);
+        if(result){
+          options.value = result.categorys.data
+        }
       } catch (err) {
         console.log(err.message);
       }
     };
 
-    onMounted(loadCategorys);
+    const handleSubmit = async () =>{
+      try {
+        const result = await editExam(id, data.value);
+        if(result){
+          router.push({ name : 'danh-sach-bai-thi'})
+          ElNotification({
+            title: 'Thông báo',
+            message: h('i', { style: 'color: teal' }, `Chỉnh sửa thành công sản phẩm ${data.value.title}`),
+          })
+        }
+      } catch (err) {
+        console.log(err.message);
+      }
+    }
+    const handleCencel = () =>{
+      router.back();
+    }
+
+    onMounted( async () =>{
+      await loadData();
+      await loadCategorys()
+    })
 
 
     return{
       data,
-      handleSubmit,
       showDropdown,
       selectedOption,
       options,
       selectOption,
+      handleSubmit,
+      handleCencel
     }
   }
 }
