@@ -2,7 +2,7 @@
 <template>
   <SideBarAdmin :isSidebarOpen="isSidebarOpen" />
 
-  <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-50 min-h-screen transition-all main" :class="{ active: isSidebarOpen }">
+  <main class="w-full md:w-[calc(100%-288px)] md:ml-72 bg-gray-50 min-h-screen transition-all main" :class="{ active: isSidebarOpen }">
 
     <HeaderAdmin :toggleSidebar="toggleSidebar"/>
 

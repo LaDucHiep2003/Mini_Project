@@ -1,45 +1,45 @@
 
 <template>
-  <div class="fixed left-0 top-0 w-64 h-full bg-gray-900 p-4 z-50 sidebar-menu transition-transform" :class="{ '-translate-x-full': isSidebarOpen }">
+  <div class="fixed left-0 top-0 w-72 h-full shadow-shadow-1 p-4 z-50 sidebar-menu transition-transform bg-gray-100" :class="{ '-translate-x-full': isSidebarOpen }">
     <a href="#" class="flex items-center pb-4 border-b border-b-gray-800">
       <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded object-cover">
-      <span class="text-lg font-semibold text-white ml-3">Giáo Viên</span>
+      <span class="text-lg font-semibold ml-3">Giáo Viên</span>
     </a>
     <ul class="mt-4">
-      <li class="mb-1 group active">
+      <li class="mb-3 group active">
         <RouterLink :to="{ name : 'dashboard'}">
-          <div class="flex items-center py-2 px-4 hover:bg-gray-950 hover:text-gray-100 rounded-md text-white" :class="{ 'bg-gray-800 ': $route.name === 'dashboard' }">
+          <div class="flex items-center py-2 px-4  rounded-lg border-2 border-color-2 hover:bg-color-11 text-color-4 hover:text-white" :class="{ 'bg-color-11 text-white': $route.name === 'dashboard' }">
             <i class="ri-home-2-line mr-3 text-lg"></i>
-            <span class="text-sm">Dashboard</span>
+            <span class="text-base font-semibold ">Dashboard</span>
           </div>
         </RouterLink>
       </li>
-      <li class="mb-1 group">
+      <li class="mb-3 group">
         <div class="w-full ">
-          <div class="mx-auto w-full">
+          <div class="mx-auto w-full border-2 border-color-2 rounded-lg">
             <Disclosure v-slot="{ open }">
               <DisclosureButton
-                  class="flex w-full justify-between items-center hover:bg-gray-950 hover:text-gray-100 rounded-md py-2 px-4"
-                  :class="{ 'bg-gray-800 ': $route.name === 'danh-sach-bai-thi' }"
+                  class="flex w-full justify-between  items-center rounded-md py-2 px-4 text-color-4 hover:bg-color-11 hover:text-white"
+                  :class="{ 'bg-color-11 text-white': $route.name === 'danh-sach-bai-thi' }"
               >
-                <RouterLink :to="{ name : 'danh-sach-bai-thi'}" class="flex items-center text-gray-300 ">
+                <RouterLink :to="{ name : 'danh-sach-bai-thi'}" class="flex items-center font-semibold">
                   <div>
                     <i class="ri-instance-line mr-3 text-lg"></i>
-                    <span class="text-sm">Bài thi</span>
+                    <span class="text-base">Bài thi</span>
                   </div>
                 </RouterLink>
-                <i class="ri-arrow-up-s-line text-color-6" :class="open ? 'rotate-180 transform' : 'rotate-90 transform'"></i>
+                <i class="ri-arrow-up-s-line " :class="open ? 'rotate-180 transform' : 'rotate-90 transform'"></i>
               </DisclosureButton>
               <DisclosurePanel>
                 <ul class="pl-7 mt-2">
                   <li class="mb-4">
-                    <RouterLink :to="{ name : 'danh-sach-bai-thi'}" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Danh sách bài thi</RouterLink>
+                    <RouterLink :to="{ name : 'danh-sach-bai-thi'}" class="text-color-5 text-sm font-medium flex items-center hover:text-color-11 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Danh sách bài thi</RouterLink>
                   </li>
                   <li class="mb-4">
-                    <RouterLink :to="{ name : 'them-bai-thi'}" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Tạo bài thi</RouterLink>
+                    <RouterLink :to="{ name : 'them-bai-thi'}" class="text-color-5 text-sm font-medium flex items-center hover:text-color-11 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Tạo bài thi</RouterLink>
                   </li>
                   <li class="mb-4">
-                    <RouterLink to="/" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Bài thi đã xóa</RouterLink>
+                    <RouterLink to="/" class="text-color-5 text-sm flex items-center font-medium hover:text-color-11 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Bài thi đã xóa</RouterLink>
                   </li>
                 </ul>
 
@@ -49,33 +49,73 @@
           </div>
         </div>
       </li>
-      <li class="mb-1 group">
+      <li class="mb-3 group">
         <div class="w-full ">
-          <div class="mx-auto w-full">
+          <div class="mx-auto w-full border-2 border-color-2 rounded-lg">
             <Disclosure v-slot="{ open }">
               <DisclosureButton
-                  class="flex w-full justify-between items-center hover:bg-gray-950 hover:text-gray-100 rounded-md py-2 px-4"
-                  :class="{ 'bg-gray-800 ': $route.name === 'danh-sach-danh-muc' }"
+                  class="flex w-full justify-between  items-center rounded-md py-2 px-4 hover:bg-color-11 text-color-4 hover:text-white"
+                  :class="{ 'bg-color-11 text-white': $route.name === 'danh-sach-danh-muc' }"
               >
-                <RouterLink :to="{ name : 'danh-sach-danh-muc'}" class="flex items-center text-gray-300 ">
+                <RouterLink :to="{ name : 'danh-sach-danh-muc'}" class="flex items-center font-semibold">
                   <div>
                     <i class="ri-instance-line mr-3 text-lg"></i>
-                    <span class="text-sm">Danh mục</span>
+                    <span class="text-base">Danh mục</span>
                   </div>
                 </RouterLink>
-                <i class="ri-arrow-up-s-line text-color-6" :class="open ? 'rotate-180 transform' : 'rotate-90 transform'"></i>
+                <i class="ri-arrow-up-s-line" :class="open ? 'rotate-180 transform' : 'rotate-90 transform'"></i>
               </DisclosureButton>
               <DisclosurePanel>
                 <ul class="pl-7 mt-2">
                   <li class="mb-4">
-                    <RouterLink :to="{ name : 'danh-sach-danh-muc'}" class="text-gray-300 text-sm flex items-center hover:text-gray-100
-                       before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Danh sách danh mục</RouterLink>
+                    <RouterLink :to="{ name : 'danh-sach-danh-muc'}" class="text-color-5 text-sm flex items-center hover:text-color-11
+                       before:w-1 before:h-1 before:rounded-full font-medium before:bg-gray-300 before:mr-3 ">Danh sách danh mục</RouterLink>
                   </li>
                   <li class="mb-4">
-                    <RouterLink :to="{ name : 'them-danh-muc'}" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Tạo bài thi</RouterLink>
+                    <RouterLink :to="{ name : 'them-danh-muc'}" class="text-color-5  font-medium text-sm flex items-center hover:text-color-11
+                      before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Tạo danh mục bài thi</RouterLink>
                   </li>
                   <li class="mb-4">
-                    <RouterLink to="/" class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Bài thi đã xóa</RouterLink>
+                    <RouterLink to="/" class="text-color-5 text-sm flex items-center font-medium hover:text-color-11 before:contents-['']
+                      before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Danh mục đã xóa</RouterLink>
+                  </li>
+                </ul>
+
+              </DisclosurePanel>
+            </Disclosure>
+
+          </div>
+        </div>
+      </li>
+      <li class="mb-3 group">
+        <div class="w-full ">
+          <div class="mx-auto w-full">
+            <Disclosure v-slot="{ open }">
+              <DisclosureButton
+                  class="flex w-full justify-between  items-center rounded-md py-2 px-4 text-color-4 hover:bg-color-11 hover:text-white"
+                  :class="{ 'bg-color-11 text-white': $route.name === 'danh-sach-cau-hoi' }"
+              >
+                <RouterLink :to="{ name : 'danh-sach-cau-hoi'}" class="flex items-center   font-semibold">
+                  <div>
+                    <i class="ri-instance-line mr-3 text-lg"></i>
+                    <span class="text-base">Câu hỏi</span>
+                  </div>
+                </RouterLink>
+                <i class="ri-arrow-up-s-line" :class="open ? 'rotate-180 transform' : 'rotate-90 transform'"></i>
+              </DisclosureButton>
+              <DisclosurePanel>
+                <ul class="pl-7 mt-2">
+                  <li class="mb-4">
+                    <RouterLink :to="{ name : 'danh-sach-cau-hoi'}" class="text-color-5 text-sm flex items-center hover:text-color-11
+                       before:w-1 before:h-1 before:rounded-full font-medium before:bg-gray-300 before:mr-3 ">Danh sách câu hỏi</RouterLink>
+                  </li>
+                  <li class="mb-4">
+                    <RouterLink :to="{ name : 'them-cau-hoi'}" class="text-color-5  font-medium text-sm flex items-center hover:text-color-11
+                      before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Tạo câu hỏi</RouterLink>
+                  </li>
+                  <li class="mb-4">
+                    <RouterLink to="/" class="text-color-5 text-sm flex items-center font-medium hover:text-color-11 before:contents-['']
+                      before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Câu hỏi đã xóa</RouterLink>
                   </li>
                 </ul>
 

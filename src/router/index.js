@@ -15,6 +15,8 @@ import DanhSachDanhMuc from "@/pages/Admin/DanhSachDanhMuc.vue";
 import ThemDanhMuc from "@/pages/Admin/ThemDanhMuc.vue";
 import SuaDanhMuc from "@/pages/Admin/SuaDanhMuc.vue";
 import SuaBaiThi from "@/pages/Admin/SuaBaiThi.vue";
+import DanhSachCauHoi from "@/pages/Admin/DanhSachCauHoi.vue";
+import ThemCauHoi from "@/components/Admin/CauHoi/ThemCauHoi.vue";
 const routes = [
     {
       path: "/",
@@ -98,6 +100,16 @@ const routes = [
                 path: 'sua-danh-muc/:id',
                 component: SuaDanhMuc,
                 name : 'sua-danh-muc'
+            },
+            {
+                path: 'danh-sach-cau-hoi',
+                component: DanhSachCauHoi,
+                name : 'danh-sach-cau-hoi'
+            },
+            {
+                path: 'them-cau-hoi',
+                component: ThemCauHoi,
+                name : 'them-cau-hoi'
             },
         ]
     },
