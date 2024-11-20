@@ -6,7 +6,7 @@
       <span class="text-lg font-semibold ml-3">Giáo Viên</span>
     </a>
     <ul class="mt-4">
-      <li class="mb-3 group active">
+      <li class="mb-3 group">
         <RouterLink :to="{ name : 'dashboard'}">
           <div class="flex items-center py-2 px-4  rounded-lg border-2 border-color-2 hover:bg-color-11 text-color-4 hover:text-white" :class="{ 'bg-color-11 text-white': $route.name === 'dashboard' }">
             <i class="ri-home-2-line mr-3 text-lg"></i>
@@ -89,7 +89,7 @@
       </li>
       <li class="mb-3 group">
         <div class="w-full ">
-          <div class="mx-auto w-full">
+          <div class="mx-auto w-full border-2 border-color-2 rounded-lg">
             <Disclosure v-slot="{ open }">
               <DisclosureButton
                   class="flex w-full justify-between  items-center rounded-md py-2 px-4 text-color-4 hover:bg-color-11 hover:text-white"

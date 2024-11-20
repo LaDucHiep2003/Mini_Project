@@ -17,6 +17,7 @@ import SuaDanhMuc from "@/pages/Admin/SuaDanhMuc.vue";
 import SuaBaiThi from "@/pages/Admin/SuaBaiThi.vue";
 import DanhSachCauHoi from "@/pages/Admin/DanhSachCauHoi.vue";
 import ThemCauHoi from "@/components/Admin/CauHoi/ThemCauHoi.vue";
+import SuaCauHoi from "@/components/Admin/CauHoi/SuaCauHoi.vue";
 const routes = [
     {
       path: "/",
@@ -110,6 +111,11 @@ const routes = [
                 path: 'them-cau-hoi',
                 component: ThemCauHoi,
                 name : 'them-cau-hoi'
+            },
+            {
+                path: 'sua-cau-hoi/:id',
+                component: SuaCauHoi,
+                name : 'sua-cau-hoi'
             },
         ]
     },

@@ -4,7 +4,7 @@
     <div class="text-[50px] text-color-11 font-great text-center">
       Danh sách câu hỏi
     </div>
-    <RouterLink :to="{ name : 'them-bai-thi'}">
+    <RouterLink :to="{ name : 'them-cau-hoi'}">
       <button class="min-h-9 w-[150px] border-2 border-green-700 font-semibold px-2 text-sm
                rounded-md bg-color-2 text-white transition-all duration-500 hover:translate-y-[-6px]">Thêm câu hỏi</button>
     </RouterLink>
@@ -25,14 +25,14 @@
         <div class="px-4">
           <ul>
             <li v-for="(item, index) in listQuestion" :key="item.id" class="flex items-center py-3 text-sm border-b border-color-7 justify-between text-center">
-              <div class="min-w-5 px-6 bg-custom_1">{{ index + 1}}</div>
+              <div class="min-w-5 px-6 bg-custom_1">{{item.id}}</div>
               <div class="flex justify-center items-center text-center h-12 ml-4 mr-[10px] min-w-[23%] w-2/12 line-clamp-3">{{ item.title}}</div>
               <div class="overflow-hidden line-clamp-1 overflow-ellipsis break-words text-center min-h-5 min-w-[23%]">{{ item.Subject}}</div>
               <div class="px-1 min-w-[15%] break-words text-sm">{{ item.correctAns }}</div>
               <div class="px-1 min-w-[15%] break-words text-sm">{{ item.answerlist }}</div>
               <div class="px-1 break-words text-sm min-w-[19%]">
                 <div class="flex justify-center items-center gap-3">
-                  <RouterLink :to="`/admin/sua-bai-thi/${item.id}`">
+                  <RouterLink :to="`/admin/sua-cau-hoi/${item.id}`">
                     <button class="min-h-9 w-24 border-2 border-green-700 font-semibold px-2 text-sm
                                   rounded-lg bg-color-2 text-white transition-all duration-500 hover:translate-y-[-6px]">Sửa</button>
                   </RouterLink>
@@ -80,7 +80,7 @@
                             <div class="text-base">Bạn có muốn xóa bài thi này không?</div>
                             <div class="flex justify-end items-center gap-2 mt-6">
                               <button @click="closeModal" class="w-[100px] h-9 bg-gray-300 rounded-lg text-base font-medium">Hủy</button>
-                              <button @click="handleDelete(exam.id)" class="w-[100px] h-9 bg-red-500 rounded-lg text-base font-medium text-white">Đồng ý</button>
+                              <button @click="handleDelete(item.id)" class="w-[100px] h-9 bg-red-500 rounded-lg text-base font-medium text-white">Đồng ý</button>
                             </div>
                           </div>
                         </DialogPanel>
@@ -99,12 +99,11 @@
 </template>
 
 <script>
-import {deleteExam} from "@/service/ExamService.js";
 import {onMounted, ref} from "vue";
 import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot} from "@headlessui/vue";
 import { h } from 'vue'
 import { ElNotification } from 'element-plus'
-import {getQuestions} from "@/service/QuestionService.js";
+import {deleteQuestion, getQuestions} from "@/service/QuestionService.js";
 
 export default {
   components: {TransitionRoot, TransitionChild, DialogPanel, DialogTitle, Dialog, ElNotification},
@@ -125,12 +124,12 @@ export default {
 
     const handleDelete = async (id) =>{
       try {
-        const result = await deleteExam(id);
+        const result = await deleteQuestion(id);
         if(result){
           await loadQuestion();
           ElNotification({
             title: 'Thông báo',
-            message: h('i', { style: 'color: red' }, `Xóa thành công sản phẩm`),
+            message: h('i', { style: 'color: red' }, `Xóa thành công câu hỏi`),
           })
         }
       } catch (err) {
