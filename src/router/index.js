@@ -46,7 +46,7 @@ const routes = [
       ]
     },
     {
-        path: "/luyen-tap",
+        path: "/luyen-tap/:id",
         component: LamBaiThi,
         name: "lambaithi"
     },

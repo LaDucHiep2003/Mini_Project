@@ -5,6 +5,15 @@ export const getCategorys = async (page) => {
     return result;
 }
 
+export const getCategoryParent = async () => {
+    const result = await get(`categoryParent`);
+    return result;
+}
+export const getCategoryParent_2 = async (slug) => {
+    const result = await get(`categoryParent2/${slug}`);
+    return result;
+}
+
 export const getDetailCategory = async (id) => {
     const result = await get(`category/detail/${id}`);
     return result;

@@ -30,8 +30,10 @@
                 <div class="text-base ml-5">Ôn tập kiến thức trong chương trình học</div>
               </div>
             </div>
-          <button class="min-h-10 w-52 border border-color-2 text-white font-semibold bg-color-2 px-5 text-base
-                        rounded-md transition-all duration-300 mt-6">Làm bài </button>
+          <RouterLink to="/luyen-tap/1">
+            <button class="min-h-10 w-52 border border-color-2 text-white font-semibold bg-color-2 px-5 text-base
+                          rounded-md transition-all duration-300 mt-6">Làm bài </button>
+          </RouterLink>
         </div>
     </div>
 </template>
