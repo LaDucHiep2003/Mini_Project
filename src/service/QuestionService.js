@@ -9,6 +9,11 @@ export const getDetailQuestion = async (id) => {
     return result;
 }
 
+export const getQuestioninExam = async (id) => {
+    const result = await get(`questions/exam/${id}`);
+    return result;
+}
+
 export const createQuestion = async (option) => {
     const result = await post(`createQuestion`, option);
     return result;

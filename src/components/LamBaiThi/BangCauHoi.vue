@@ -6,24 +6,10 @@
 
     <div>
       <div class="flex gap-2 flex-wrap px-2 mt-3 max-h-52 overflow-scroll scroll-w-none">
-        <div class="w-7 h-7 bg-gray-200 flex justify-center items-center rounded-lg text-sm font-semibold">1</div>
-        <div class="w-7 h-7 flex justify-center items-center rounded-lg text-sm font-semibold text-white bg-color-3">2</div>
-        <div class="w-7 h-7 bg-gray-200 flex justify-center items-center rounded-lg text-sm font-semibold text-color-4">1</div>
-        <div class="w-7 h-7 bg-gray-200 flex justify-center items-center rounded-lg text-sm font-semibold text-color-4">1</div>
-        <div class="w-7 h-7 bg-gray-200 flex justify-center items-center rounded-lg text-sm font-semibold text-color-4">1</div>
-        <div class="w-7 h-7 bg-gray-200 flex justify-center items-center rounded-lg text-sm font-semibold text-color-4">1</div>
-        <div class="w-7 h-7 bg-gray-200 flex justify-center items-center rounded-lg text-sm font-semibold text-color-4">1</div>
-        <div class="w-7 h-7 bg-gray-200 flex justify-center items-center rounded-lg text-sm font-semibold text-color-4">1</div>
-        <div class="w-7 h-7 bg-gray-200 flex justify-center items-center rounded-lg text-sm font-semibold text-color-4">1</div>
-        <div class="w-7 h-7 bg-gray-200 flex justify-center items-center rounded-lg text-sm font-semibold">1</div>
-        <div class="w-7 h-7 bg-gray-200 flex justify-center items-center rounded-lg text-sm font-semibold text-color-4">2</div>
-        <div class="w-7 h-7 bg-gray-200 flex justify-center items-center rounded-lg text-sm font-semibold text-color-4">1</div>
-        <div class="w-7 h-7 bg-gray-200 flex justify-center items-center rounded-lg text-sm font-semibold text-color-4">1</div>
-        <div class="w-7 h-7 bg-gray-200 flex justify-center items-center rounded-lg text-sm font-semibold text-color-4">1</div>
-        <div class="w-7 h-7 bg-gray-200 flex justify-center items-center rounded-lg text-sm font-semibold text-color-4">1</div>
-        <div class="w-7 h-7 bg-gray-200 flex justify-center items-center rounded-lg text-sm font-semibold text-color-4">1</div>
-        <div class="w-7 h-7 bg-gray-200 flex justify-center items-center rounded-lg text-sm font-semibold text-color-4">1</div>
-        <div class="w-7 h-7 bg-gray-200 flex justify-center items-center rounded-lg text-sm font-semibold text-color-4">1</div>
+        <div v-for="(i) in totalQuestionsArray" class="w-7 h-7 bg-gray-200 flex justify-center items-center rounded-lg
+          text-sm font-semibold">{{ i }}</div>
+<!--        <div class="w-7 h-7 flex justify-center items-center rounded-lg text-sm font-semibold text-white bg-color-3">2</div>-->
+
       </div>
       <div @click="openModal" class="border border-color-5 rounded-2xl mt-3 py-1 cursor-pointer">
         <button class="text-[15px] text-color-4 font-semibold">Tạm dừng</button>
@@ -135,8 +121,8 @@
 </template>
 
 
-<script setup>
-import { ref } from 'vue'
+<script>
+import {computed, ref} from 'vue'
 import {
   TransitionRoot,
   TransitionChild,
@@ -144,21 +130,50 @@ import {
   DialogPanel,
   DialogTitle,
 } from '@headlessui/vue'
+import {useRoute} from "vue-router";
 
-const isOpen = ref(false)
-const isOpenSubmit = ref(false)
-
-function closeModalSubmit() {
-  isOpenSubmit.value = false
-}
-function openModalSubmit() {
-  isOpenSubmit.value = true
-}
-function closeModal() {
-  isOpen.value = false
-}
-function openModal() {
-  isOpen.value = true
-}
-
+export default {
+  components: {
+    TransitionRoot,
+    TransitionChild,
+    Dialog,
+    DialogPanel,
+    DialogTitle,
+  },
+  data() {
+    return {
+      isOpen: false,
+      isOpenSubmit: false,
+    };
+  },
+  props: {
+    data: {
+      type: Object,
+      required: true,
+    },
+  },
+  setup(props) {
+    // Tạo một mảng từ 1 đến totalQuestion
+    const totalQuestionsArray = computed(() =>
+        Array.from({ length: props.data.totalQuestion }, (_, i) => i + 1)
+    );
+    return {
+      totalQuestionsArray,
+    };
+  },
+  methods: {
+    closeModalSubmit() {
+      this.isOpenSubmit = false;
+    },
+    openModalSubmit() {
+      this.isOpenSubmit = true;
+    },
+    closeModal() {
+      this.isOpen = false;
+    },
+    openModal() {
+      this.isOpen = true;
+    },
+  },
+};
 </script>

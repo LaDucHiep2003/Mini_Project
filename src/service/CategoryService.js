@@ -9,6 +9,10 @@ export const getCategoryParent = async () => {
     const result = await get(`categoryParent`);
     return result;
 }
+export const getDetailCategoryParent = async (slug) => {
+    const result = await get(`categoryParent/detail/${slug}`);
+    return result;
+}
 export const getCategoryParent_2 = async (slug) => {
     const result = await get(`categoryParent2/${slug}`);
     return result;

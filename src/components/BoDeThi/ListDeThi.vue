@@ -16,7 +16,7 @@
             </div>
             <ul>
               <li v-for="exam in item.exams" :key='item.id'>
-                <RouterLink to="test/1" class="pl-8 flex w-full">
+                <RouterLink :to="`/de-thi-dgnl/test/${exam.id}`" class="pl-8 flex w-full">
                   <div class="w-full">
                     <div class="flex">
                       <div class="w-7 flex items-center relative list_exam">

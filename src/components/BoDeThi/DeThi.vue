@@ -7,9 +7,8 @@
         >{{ item.title }}</RouterLink>
       </div>
         <div class="text-center my-10">
-            <div class="text-3xl font-semibold text-color-3 mb-2">Đề thi thử đánh giá năng lực đại học quốc gia Hà Nội</div>
-            <div class="text-color-4 text-base">Luyện bộ đề thi thử đánh giá năng lực đại học quốc gia Hà Nội với bộ câu hỏi và ngân 
-                hàng đề thi sát với dạng đề thi thật giúp bạn chuẩn bị tốt cho kỳ thi ĐGNL.</div>
+            <div class="text-3xl font-semibold text-color-3 mb-2">{{ dataCategory.title }}</div>
+            <div class="text-color-4 text-base">{{ dataCategory.description }}</div>
         </div>
       <div class="flex">
         <ListDeThi />
@@ -22,7 +21,8 @@
   import ListDeThi from "@/components/BoDeThi/ListDeThi.vue";
   import BangXepHang from "@/components/BoDeThi/BangXepHang.vue";
   import {onMounted, ref} from "vue";
-  import {getCategoryParent} from "@/service/CategoryService.js";
+  import {getCategoryParent, getDetailCategoryParent} from "@/service/CategoryService.js";
+  import {useRoute} from "vue-router";
 
   export default {
     components: {
@@ -36,6 +36,9 @@
     },
     setup(){
       const data = ref([]);
+      const route = useRoute();
+      const slug = route.params.slug;
+      const dataCategory = ref([])
 
       const loadData = async () => {
         const result = await getCategoryParent();
@@ -45,9 +48,22 @@
         }
       }
 
-      onMounted(loadData)
+      const loadDataDetail = async () =>{
+        const result = await getDetailCategoryParent(slug)
+        if(result){
+          dataCategory.value = result.data
+          console.log(result.data)
+        }
+      }
+
+
+      onMounted( async () =>{
+        await  loadData();
+        await loadDataDetail();
+      })
       return {
-        data
+        data,
+        dataCategory
       }
 
     },
