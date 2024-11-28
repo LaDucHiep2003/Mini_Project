@@ -18,6 +18,8 @@ import SuaBaiThi from "@/pages/Admin/SuaBaiThi.vue";
 import DanhSachCauHoi from "@/pages/Admin/DanhSachCauHoi.vue";
 import ThemCauHoi from "@/components/Admin/CauHoi/ThemCauHoi.vue";
 import SuaCauHoi from "@/components/Admin/CauHoi/SuaCauHoi.vue";
+import UocLuongNangLucTS from "@/pages/Admin/UocLuongNangLucTS.vue";
+import DanhGiaCauHoi from "@/pages/Admin/DanhGiaCauHoi.vue";
 const routes = [
     {
       path: "/",
@@ -116,6 +118,16 @@ const routes = [
                 path: 'sua-cau-hoi/:id',
                 component: SuaCauHoi,
                 name : 'sua-cau-hoi'
+            },
+            {
+                path: 'nang-luc-ts',
+                component: UocLuongNangLucTS,
+                name : 'nang-luc-ts'
+            },
+            {
+                path: 'danh-gia-cau-hoi',
+                component: DanhGiaCauHoi,
+                name : 'danh-gia-cau-hoi'
             },
         ]
     },

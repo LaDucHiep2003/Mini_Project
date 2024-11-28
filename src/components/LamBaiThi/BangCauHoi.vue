@@ -6,10 +6,8 @@
 
     <div>
       <div class="flex gap-2 flex-wrap px-2 mt-3 max-h-52 overflow-scroll scroll-w-none">
-        <div v-for="(i) in totalQuestionsArray" class="w-7 h-7 bg-gray-200 flex justify-center items-center rounded-lg
-          text-sm font-semibold">{{ i }}</div>
-<!--        <div class="w-7 h-7 flex justify-center items-center rounded-lg text-sm font-semibold text-white bg-color-3">2</div>-->
-
+        <div v-for="(i, index) in data" @click="scrollToQuestion(i)"
+             :class="['w-7 h-7 flex justify-center items-center rounded-lg text-sm font-semibold cursor-pointer', selectedAnswers[i.id_ques] ? 'text-white bg-color-3' : 'bg-gray-200']">{{ index + 1 }}</div>
       </div>
       <div @click="openModal" class="border border-color-5 rounded-2xl mt-3 py-1 cursor-pointer">
         <button class="text-[15px] text-color-4 font-semibold">Tạm dừng</button>
@@ -109,7 +107,7 @@
                 <div class="text-base">Bạn có muốn nộp bài?</div>
                 <div class="flex justify-end items-center gap-2 mt-6">
                   <button @click="closeModalSubmit" class="w-[100px] h-9 bg-gray-300 rounded-lg text-base font-medium">Hủy</button>
-                  <button class="w-[100px] h-9 bg-color-3 rounded-lg text-base font-medium text-white">Đồng ý</button>
+                  <button @click="handleSubmit" class="w-[100px] h-9 bg-color-3 rounded-lg text-base font-medium text-white">Đồng ý</button>
                 </div>
               </div>
             </DialogPanel>
@@ -122,7 +120,7 @@
 
 
 <script>
-import {computed, ref} from 'vue'
+import {computed, onMounted, ref} from 'vue'
 import {
   TransitionRoot,
   TransitionChild,
@@ -131,6 +129,7 @@ import {
   DialogTitle,
 } from '@headlessui/vue'
 import {useRoute} from "vue-router";
+import {getQuestioninExam} from "@/service/QuestionService.js";
 
 export default {
   components: {
@@ -147,20 +146,47 @@ export default {
     };
   },
   props: {
-    data: {
-      type: Object,
+    selectedAnswers :{
+      type : Array,
       required: true,
-    },
+    }
   },
   setup(props) {
+    const data = ref([]); // Chứa danh sách câu hỏi từ API
+    const route = useRoute();
+    const id = route.params.id;
+
+    // Hàm tải dữ liệu từ API
+    const loadData = async () => {
+      const result = await getQuestioninExam(id);
+      if (result) {
+        data.value = result.questions;
+        console.log(result.questions)
+      }
+    }
+    onMounted(loadData)
     // Tạo một mảng từ 1 đến totalQuestion
-    const totalQuestionsArray = computed(() =>
-        Array.from({ length: props.data.totalQuestion }, (_, i) => i + 1)
-    );
+    // const totalQuestionsArray = computed(() =>
+    //     Array.from({ length: props.data.totalQuestion }, (_, i) => i + 1)
+    // );
+    const scrollToQuestion = (index) => {
+      const element = document.getElementById(`question-${index}`);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    };
+    const handleSubmit = () =>{
+      console.log(props.selectedAnswers)
+    }
+
     return {
-      totalQuestionsArray,
+      // totalQuestionsArray,
+      scrollToQuestion,
+      handleSubmit,
+      data
     };
   },
+
   methods: {
     closeModalSubmit() {
       this.isOpenSubmit = false;

@@ -1,6 +1,6 @@
 
 <template>
-  <div class="container mx-auto">
+  <div class="container mx-auto mb-10">
     <div class="text-center mt-10 relative">
       <div class="text-2xl font-bold">{{ data.title }}</div>
 
@@ -9,8 +9,8 @@
         <div class="text-sm font-bold text-green-500">{{ formattedTime }}</div>
       </div>
       <div class="flex gap-5">
-          <CauHoi />
-          <BangCauHoi :data="data" />
+          <CauHoi :selectAnswer="selectAnswer" />
+          <BangCauHoi :selectedAnswers="selectedAnswers" />
       </div>
     </div>
   </div>
@@ -33,6 +33,12 @@
       const id = route.params.id;
       const data = ref([]);
 
+      const selectedAnswers = ref([]); // Lưu câu trả lời đã chọn cho từng câu hỏi
+
+      const selectAnswer = (id, answer) => {
+        selectedAnswers.value[id] = answer;
+      };
+
       const loadExam = async () =>{
         const result = await getDetailExam(id);
         if(result){
@@ -53,7 +59,9 @@
 
       return{
         data,
-        formattedTime
+        formattedTime,
+        selectAnswer,
+        selectedAnswers
       }
     }
   }

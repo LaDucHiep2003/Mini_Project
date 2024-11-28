@@ -125,7 +125,44 @@
           </div>
         </div>
       </li>
+      <li class="mb-3 group">
+        <div class="w-full ">
+          <div class="mx-auto w-full border-2 border-color-2 rounded-lg">
+            <Disclosure v-slot="{ open }">
+              <DisclosureButton
+                  class="flex w-full justify-between  items-center rounded-md py-2 px-4 text-color-4 hover:bg-color-11 hover:text-white"
+                  :class="{ 'bg-color-11 text-white': $route.name === 'nang-luc-ts' }"
+              >
+                <RouterLink :to="{ name : 'nang-luc-ts'}" class="flex items-center   font-semibold">
+                  <div>
+                    <i class="ri-instance-line mr-3 text-lg"></i>
+                    <span class="text-base">IRT</span>
+                  </div>
+                </RouterLink>
+                <i class="ri-arrow-up-s-line" :class="open ? 'rotate-180 transform' : 'rotate-90 transform'"></i>
+              </DisclosureButton>
+              <DisclosurePanel>
+                <ul class="pl-7 mt-2">
+                  <li class="mb-4">
+                    <RouterLink :to="{ name : 'nang-luc-ts'}" class="text-color-5 text-sm flex items-center hover:text-color-11
+                       before:w-1 before:h-1 before:rounded-full font-medium before:bg-gray-300 before:mr-3 ">Rasch</RouterLink>
+                  </li>
+                  <li class="mb-4">
+                    <RouterLink :to="{ name : 'danh-gia-cau-hoi'}" class="text-color-5  font-medium text-sm flex items-center hover:text-color-11
+                      before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Đánh giá câu hỏi</RouterLink>
+                  </li>
+                  <li class="mb-4">
+                    <RouterLink to="/" class="text-color-5 text-sm flex items-center font-medium hover:text-color-11 before:contents-['']
+                      before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Câu hỏi đã xóa</RouterLink>
+                  </li>
+                </ul>
 
+              </DisclosurePanel>
+            </Disclosure>
+
+          </div>
+        </div>
+      </li>
     </ul>
   </div>
   <div class="fixed top-0 left-0 w-full h-full bg-black/50 z-40 md:hidden sidebar-overlay" :class="{ hidden: !isSidebarOpen }"></div>
