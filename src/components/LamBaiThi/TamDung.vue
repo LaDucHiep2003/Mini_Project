@@ -41,7 +41,7 @@
         </div>
       </div>
       <div class="flex justify-center items-center mt-10 gap-5">
-        <button class="min-h-12 w-[220px] border-2 border-green-700 font-semibold px-5 text-base
+        <button @click="onBack" class="min-h-12 w-[220px] border-2 border-green-700 font-semibold px-5 text-base
                                 rounded-lg bg-color-2 text-white transition-all duration-500 mt-5 hover:translate-y-[-6px]">Tiếp tục làm</button>
         <button class="min-h-12 w-[220px] border-2 border-color-5 text-color-5 font-semibold bg-white px-5 text-base
                                 rounded-lg transition-all duration-500 mt-5 hover:translate-y-[-6px]">Làm lại</button>
@@ -49,5 +49,19 @@
     </div>
   </div>
 </template>
-<script setup lang="ts">
+<script>
+import {useRoute, useRouter} from "vue-router";
+
+  export default {
+    setup(){
+      const router = useRouter()
+      const onBack = () =>{
+        router.go(-1)
+      }
+
+      return {
+        onBack
+      }
+    }
+  }
 </script>

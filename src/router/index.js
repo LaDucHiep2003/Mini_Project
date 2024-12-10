@@ -53,7 +53,7 @@ const routes = [
         name: "lambaithi"
     },
     {
-        path: '/stop',
+        path: '/stop/:id',
         component: TamDung,
         name : 'stop'
     },

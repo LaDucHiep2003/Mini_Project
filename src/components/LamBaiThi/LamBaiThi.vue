@@ -35,8 +35,29 @@
 
       const selectedAnswers = ref([]); // Lưu câu trả lời đã chọn cho từng câu hỏi
 
-      const selectAnswer = (id, answer) => {
+      const selectAnswer = (id, answer, data) => {
         selectedAnswers.value[id] = answer;
+
+        let correctCount = 0;
+        let incorrectCount = 0;
+        let notAnsweredCount = 0;
+
+        data.forEach((question) => {
+          if (selectedAnswers.value[question.id]) {
+            console.log(selectedAnswers.value[question.id].toUpperCase())
+            console.log(question.correctAns.toUpperCase())
+            if (selectedAnswers.value[question.id].toUpperCase() === question.correctAns.toUpperCase()) {
+              correctCount++;
+            } else {
+              incorrectCount++;
+            }
+          } else {
+            notAnsweredCount++;
+          }
+        });
+        selectedAnswers.value.correct_question = correctCount;
+        selectedAnswers.value.incorrect_question = incorrectCount;
+        selectedAnswers.value.blank_question = notAnsweredCount;
       };
 
       const loadExam = async () =>{

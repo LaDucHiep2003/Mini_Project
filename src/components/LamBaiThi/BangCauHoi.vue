@@ -58,7 +58,9 @@
               <div class="text-base">Bạn có muốn tạm dừng không?</div>
               <div class="flex justify-end items-center gap-2 mt-6">
                 <button @click="closeModal" class="w-[100px] h-9 bg-gray-300 rounded-lg text-base font-medium">Hủy</button>
-                <button class="w-[100px] h-9 bg-color-3 rounded-lg text-base font-medium text-white">Đồng ý</button>
+                <RouterLink to="/stop/1">
+                  <button class="w-[100px] h-9 bg-color-3 rounded-lg text-base font-medium text-white">Đồng ý</button>
+                </RouterLink>
               </div>
             </div>
           </DialogPanel>
@@ -155,20 +157,20 @@ export default {
     const data = ref([]); // Chứa danh sách câu hỏi từ API
     const route = useRoute();
     const id = route.params.id;
+    let score_one_question = ref(0);
+    let totalQuestions = 0; // Tổng số câu hỏi
 
     // Hàm tải dữ liệu từ API
     const loadData = async () => {
       const result = await getQuestioninExam(id);
       if (result) {
+        totalQuestions = result.questions.length;
+        score_one_question.value = Math.round(10 / result.questions.length * 100) / 100;
         data.value = result.questions;
         console.log(result.questions)
       }
     }
     onMounted(loadData)
-    // Tạo một mảng từ 1 đến totalQuestion
-    // const totalQuestionsArray = computed(() =>
-    //     Array.from({ length: props.data.totalQuestion }, (_, i) => i + 1)
-    // );
     const scrollToQuestion = (index) => {
       const element = document.getElementById(`question-${index}`);
       if (element) {
@@ -176,11 +178,12 @@ export default {
       }
     };
     const handleSubmit = () =>{
+      const score = (props.selectedAnswers.correct_question / totalQuestions) * 10 ;
+      props.selectedAnswers.score = score.toFixed(2);
       console.log(props.selectedAnswers)
     }
 
     return {
-      // totalQuestionsArray,
       scrollToQuestion,
       handleSubmit,
       data

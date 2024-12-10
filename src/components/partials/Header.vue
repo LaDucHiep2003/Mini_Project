@@ -4,20 +4,20 @@
     <div class="shadow-shadow-1 header">
         <div class="container mx-auto py-4 flex justify-between items-center ">
             <RouterLink :to="{ name : 'Home'}">
-                <img src="https://hocaz.vn/images/home/logo.svg" alt="">
+                <img src="https://hocaz.vn/images/home/logo.svg" alt="" class="max-lg:h-12">
             </RouterLink>
                 <div class="flex gap-10 text-base font-semibold items-center">
                     <div class="block p-0">
                         <RouterLink :to="{ name : 'de-thi-dgnl'}">
                             <div class="p-3 flex nav items-center transition-all duration-300" :class="{ 'text-color-2': $route.name === 'de-thi-dgnl' }">
-                                <span class="transition-all duration-500">Đề thi ĐGNL</span>
+                                <span class="transition-all duration-500 max-lg:hidden max-xl:text-sm">Đề thi ĐGNL</span>
                             </div>
                         </RouterLink>
                     </div>
                     <div class="block p-0 relative item-menu">
                         <RouterLink to="/">
                             <div class="p-3 flex nav  items-center">
-                                <span class="transition-all duration-500">THCS <i class="ri-arrow-down-s-line"></i></span>
+                                <span class="transition-all duration-500 max-lg:hidden max-xl:text-sm">THCS <i class="ri-arrow-down-s-line"></i></span>
                             </div>
                         </RouterLink>
                         <div class="w-[200px] bg-white absolute rounded shadow-shadow-1 z-[2] hidden navbar">
@@ -30,7 +30,7 @@
                     <div class="block p-0 relative item-menu">
                         <RouterLink to="/">
                             <div class="p-3 flex nav  items-center">
-                                <span class="transition-all duration-500">THPT <i class="ri-arrow-down-s-line"></i></span>
+                                <span class="transition-all duration-500 max-lg:hidden max-xl:text-sm">THPT <i class="ri-arrow-down-s-line"></i></span>
                             </div>
                         </RouterLink>
                         <div class="w-[200px] bg-white absolute rounded shadow-shadow-1 z-[2] hidden navbar">
@@ -42,13 +42,13 @@
                     <div class="block p-0">
                         <RouterLink to="/">
                             <div class="p-3 flex nav  items-center">
-                                <span class="transition-all duration-500">Tài lệu</span>
+                                <span class="transition-all duration-500 max-lg:hidden max-xl:text-sm">Tài lệu</span>
                             </div>
                         </RouterLink>
                     </div>
                   <div class="flex items-center justify-center">
-                    <button @click="openModal" class="min-h-12 border border-color-2 text-color-2 font-semibold bg-white px-5 text-base
-                      rounded-lg hover:bg-color-2 hover:text-white transition-all duration-300">Đăng nhập</button>
+                    <button @click="openModal" class="max-h-12 border border-color-2 text-color-2 font-semibold bg-white px-5 py-2 text-base
+                      rounded-lg hover:bg-color-2 hover:text-white transition-all duration-300 max-xl:text-sm">Đăng nhập</button>
                   </div>
                   <TransitionRoot appear :show="isOpen" as="template">
                     <Dialog as="div" @close="closeModal" class="relative z-10">
@@ -82,7 +82,7 @@
                             >
                               <DialogTitle
                                   as="h3"
-                                  class="text-center text-2xl font-semibold text-color-8"
+                                  class="text-center text-2xl font-semibold text-color-8 max-xl:text-sm"
                               >
                                 Đăng nhập
                               </DialogTitle>

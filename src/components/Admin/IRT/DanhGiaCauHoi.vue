@@ -24,7 +24,6 @@
         <thead>
         <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
           <th class="py-2 px-4 border-b">ID Câu hỏi</th>
-          <th class="py-2 px-4 border-b">Xác suất kỳ vọng</th>
           <th class="py-2 px-4 border-b">Outfit MNSQ</th>
           <th class="py-2 px-4 border-b">Khoảng tin cậy</th>
           <th class="py-2 px-4 border-b">T-Value</th>
@@ -37,7 +36,6 @@
             class="text-gray-700 border-b hover:bg-gray-100"
         >
           <td class="py-2 px-4 text-center">{{ result.id_ques }}</td>
-          <td class="py-2 px-4 text-center">{{ result.expected.toFixed(2) }}</td>
           <td class="py-2 px-4 text-center">{{ result.outfitMNSQ.toFixed(2) }}</td>
           <td class="py-2 px-4 text-center">
             {{ result.CI.lower.toFixed(2) }} - {{ result.CI.upper.toFixed(2) }}
