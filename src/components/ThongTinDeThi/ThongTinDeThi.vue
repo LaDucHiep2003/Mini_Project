@@ -52,7 +52,7 @@ import {onMounted, ref} from "vue";
         const result = await getDetailExam(id)
         if(result){
           data.value = result.data
-          console.log(result)
+          console.log(result.data)
         }
       }
       onMounted((loadData))

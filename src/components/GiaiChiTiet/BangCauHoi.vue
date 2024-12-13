@@ -10,16 +10,13 @@
              :class="['w-7 h-7 flex justify-center items-center rounded-lg text-sm font-semibold cursor-pointer', selectedAnswers[i.id_ques] ? 'text-white bg-color-3' : 'bg-gray-200']">{{ index + 1 }}</div>
       </div>
       <div @click="openModal" class="border border-color-5 rounded-2xl mt-3 py-1 cursor-pointer">
-        <button class="text-[15px] text-color-4 font-semibold">Tạm dừng</button>
-      </div>
-      <div @click="openModalSubmit" class="border border-color-3 rounded-2xl mt-2 py-1 bg-color-3">
-        <button class="text-[15px] text-white font-semibold">Nộp bài</button>
+        <button class="text-[15px] text-color-4 font-semibold">Thoát</button>
       </div>
     </div>
   </div>
 
   <TransitionRoot appear :show="isOpen" as="template">
-  <Dialog as="div" @close="closeModal" class="relative z-10">
+    <Dialog as="div" @close="closeModal" class="relative z-10">
     <TransitionChild
         as="template"
         enter="duration-300 ease-out"
@@ -52,10 +49,10 @@
                 as="h3"
                 class="text-center text-2xl font-semibold text-color-8"
             >
-              Tạm dừng
+              Thoát
             </DialogTitle>
             <div class="mt-2">
-              <div class="text-base">Bạn có muốn tạm dừng không?</div>
+              <div class="text-base">Bạn có muốn thoát không?</div>
               <div class="flex justify-end items-center gap-2 mt-6">
                 <button @click="closeModal" class="w-[100px] h-9 bg-gray-300 rounded-lg text-base font-medium">Hủy</button>
                 <RouterLink to="/stop/1">
@@ -69,55 +66,7 @@
     </div>
   </Dialog>
 </TransitionRoot>
-  <TransitionRoot appear :show="isOpenSubmit" as="template">
-    <Dialog as="div" @close="closeModal" class="relative z-10">
-      <TransitionChild
-          as="template"
-          enter="duration-300 ease-out"
-          enter-from="opacity-0"
-          enter-to="opacity-100"
-          leave="duration-200 ease-in"
-          leave-from="opacity-100"
-          leave-to="opacity-0"
-      >
-        <div class="fixed inset-0 bg-black/25" />
-      </TransitionChild>
 
-      <div class="fixed inset-0 overflow-y-auto">
-        <div
-            class="flex min-h-full items-center justify-center p-4 text-center relative"
-        >
-          <TransitionChild
-              as="template"
-              enter="duration-300 ease-out"
-              enter-from="opacity-0 scale-95"
-              enter-to="opacity-100 scale-100"
-              leave="duration-200 ease-in"
-              leave-from="opacity-100 scale-100"
-              leave-to="opacity-0 scale-95"
-          >
-            <DialogPanel
-                class="w-full max-w-xl transform overflow-hidden rounded-2xl bg-white px-5 pt-5 pb-3 text-left align-middle shadow-xl transition-all"
-            >
-              <DialogTitle
-                  as="h3"
-                  class="text-center text-2xl font-semibold text-color-8"
-              >
-                Nộp bài
-              </DialogTitle>
-              <div class="mt-2">
-                <div class="text-base">Bạn có muốn nộp bài?</div>
-                <div class="flex justify-end items-center gap-2 mt-6">
-                  <button @click="closeModalSubmit" class="w-[100px] h-9 bg-gray-300 rounded-lg text-base font-medium">Hủy</button>
-                  <button @click="handleSubmit" class="w-[100px] h-9 bg-color-3 rounded-lg text-base font-medium text-white">Đồng ý</button>
-                </div>
-              </div>
-            </DialogPanel>
-          </TransitionChild>
-        </div>
-      </div>
-    </Dialog>
-  </TransitionRoot>
 </template>
 
 
@@ -157,10 +106,6 @@ export default {
       type : Number,
       required: true,
     },
-    stopTimer:{
-      type : Function,
-      required: true,
-    }
   },
   setup(props) {
     const data = ref([]); // Chứa danh sách câu hỏi từ API
@@ -191,7 +136,6 @@ export default {
       props.selectedAnswers.incorrect_question = props.selectedAnswers.incorrect_question ?? 0;
       props.selectedAnswers.blank_question = props.selectedAnswers.blank_question ?? totalQuestions;
 
-      props.stopTimer();
       const score = (props.selectedAnswers.correct_question / totalQuestions) * 10 ;
       props.selectedAnswers.score = Number.isInteger(score) ? score : score.toFixed(2);
 

@@ -8,16 +8,16 @@
         <div class="text-sm font-bold text-green-500">{{ formattedTime }}</div>
       </div>
       <div class="flex gap-5">
-          <CauHoi :selectAnswer="selectAnswer" />
-          <BangCauHoi :selectedAnswers="selectedAnswers" :timer="duration" :stopTimer="stopTimer" />
+          <CauHoi />
+          <BangCauHoi :selectedAnswers="selectedAnswers" :timer="duration" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  import BangCauHoi from "@/components/LamBaiThi/BangCauHoi.vue";
-  import CauHoi from "@/components/LamBaiThi/CauHoi.vue";
+  import BangCauHoi from "@/components/GiaiChiTiet/BangCauHoi.vue";
+  import CauHoi from "@/components/GiaiChiTiet/CauHoi.vue";
   import {useRoute} from "vue-router";
   import {computed, onMounted, onUnmounted, ref} from "vue";
   import {getDetailExam} from "@/service/ExamService.js";
@@ -31,7 +31,6 @@
       const route = useRoute();
       const id = route.params.id;
       const data = ref([]);
-      const timer = ref(null);
       const duration = ref(0);
 
       const selectedAnswers = ref([]); // Lưu câu trả lời đã chọn cho từng câu hỏi
@@ -90,36 +89,16 @@
 
         return `${format(hours)}:${format(minutes)}:${format(seconds)}`;
       });
-      const startTimer = () => {
-        timer.value = setInterval(() => {
-          if (data.value.duration > 0) {
-            duration.value = data.value.duration;
-            data.value.duration--;
-          } else {
-            clearInterval(timer.value); // Dừng bộ đếm khi hết giờ
-            alert("Hết giờ! Bài thi sẽ được tự động nộp."); // Xử lý hết giờ
-          }
-        }, 1000); // Giảm thời gian mỗi giây
-      };
-
-      const stopTimer = () => {
-        if (timer.value) {
-          clearInterval(timer.value); // Dọn dẹp bộ đếm khi component bị hủy
-        }
-      };
 
       onMounted(() => {
-        loadExam().then(startTimer);
+        loadExam();
       });
-
-      onUnmounted(stopTimer); // Dọn dẹp khi component bị hủy
 
       return{
         data,
         formattedTime,
         selectAnswer,
         selectedAnswers,
-        stopTimer,
         duration
       }
     }

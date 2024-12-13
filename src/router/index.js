@@ -20,6 +20,8 @@ import ThemCauHoi from "@/components/Admin/CauHoi/ThemCauHoi.vue";
 import SuaCauHoi from "@/components/Admin/CauHoi/SuaCauHoi.vue";
 import UocLuongNangLucTS from "@/pages/Admin/UocLuongNangLucTS.vue";
 import DanhGiaCauHoi from "@/pages/Admin/DanhGiaCauHoi.vue";
+import LayoutBaiThi from "@/components/LamBaiThi/LayoutBaiThi.vue";
+import GiaiChiTiet from "@/pages/GiaiChiTiet/GiaiChiTiet.vue";
 const routes = [
     {
       path: "/",
@@ -48,19 +50,30 @@ const routes = [
       ]
     },
     {
-        path: "/luyen-tap/:id",
-        component: LamBaiThi,
+      path: "/luyen-tap",
+      component: LayoutBaiThi,
+      children: [
+          {
+              path: ':id',
+              component: LamBaiThi,
+              name : 'lam-bai-thi'
+          },
+          {
+              path: 'stop/:id',
+              component: TamDung,
+              name : 'stop'
+          },
+          {
+              path: 'ket-qua/:id',
+              component: KetQua,
+              name : 'ket-qua'
+          },
+      ]
+    },
+    {
+        path: "/giai-chi-tiet/:id",
+        component: GiaiChiTiet,
         name: "lambaithi"
-    },
-    {
-        path: '/stop/:id',
-        component: TamDung,
-        name : 'stop'
-    },
-    {
-        path: '/ket-qua',
-        component: KetQua,
-        name : 'ket-qua'
     },
     {
         path: '/admin',
