@@ -11,10 +11,10 @@
       </div>
       <div class="flex flex-col items-start mt-8">
         <label v-for="(answer, answerIndex) in item.answerlist" :key="answerIndex" class="flex items-center mb-2 cursor-pointer text-lg hover:bg-color-7 w-full py-2 px-3 rounded-md relative">
-          <input type="radio" :name="`option-${item.id}`" :value="answer" class="hidden peer">
+          <input type="radio" :name="`option-${item.id}`" :value="answer" class="hidden">
           <span class="w-6 h-6 border-[3px] border-gray-300 rounded-lg flex items-center justify-center peer-checked:border-blue-500
               transition-colors relative"></span>
-          <span class="w-2.5 h-2.5 bg-blue-500 rounded-full peer-checked:inline-block hidden absolute left-[19px]"></span>
+          <span class="w-2.5 h-2.5 bg-blue-500 rounded-full hidden absolute left-[19px]"></span>
           <span class="ml-2 text-base font-medium">{{ alphabet(answerIndex) }}. {{ answer }}</span>
         </label>
       </div>
@@ -23,8 +23,8 @@
 </template>
 <script>
 import { useRoute } from "vue-router";
-import { getQuestioninExam } from "@/service/QuestionService.js";
 import { onMounted, ref } from "vue";
+import {getQuestions} from "@/service/ResultService.js";
 
 export default {
   setup() {
@@ -34,14 +34,13 @@ export default {
 
     // Hàm tải dữ liệu từ API
     const loadData = async () => {
-      const result = await getQuestioninExam(id);
+      const result = await getQuestions(id);
       if (result) {
         data.value = result.questions.map((question) => ({
           ...question,
-          // Chuyển đổi answerlist từ chuỗi không hợp lệ thành mảng hợp lệ
           answerlist: question.answerlist
-              .replace(/[\[\]\s]/g, "") // Loại bỏ dấu ngoặc vuông và khoảng trắng
-              .split(","),             // Tách chuỗi thành mảng
+              .replace(/[\[\]\s]/g, "")
+              .split(","),
         }));
       }
     };

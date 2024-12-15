@@ -4,7 +4,10 @@ export const getResult = async () => {
     const result = await get(`results`);
     return result;
 }
-
+export const getQuestions = async (id) => {
+    const result = await get(`results/questions/${id}`);
+    return result;
+}
 export const getResultDetail = async (id) => {
     const result = await get(`result/detail/${id}`);
     return result;

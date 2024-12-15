@@ -81,7 +81,7 @@ import {
 } from '@headlessui/vue'
 import {useRoute, useRouter} from "vue-router";
 import {getQuestioninExam} from "@/service/QuestionService.js";
-import {createResult} from "@/service/ResultService.js";
+import {createResult, getQuestions} from "@/service/ResultService.js";
 
 export default {
   components: {
@@ -117,7 +117,7 @@ export default {
 
     // Hàm tải dữ liệu từ API
     const loadData = async () => {
-      const result = await getQuestioninExam(id);
+      const result = await getQuestions(id);
       if (result) {
         totalQuestions = result.questions.length;
         score_one_question.value = Math.round(10 / result.questions.length * 100) / 100;
@@ -162,12 +162,6 @@ export default {
   },
 
   methods: {
-    closeModalSubmit() {
-      this.isOpenSubmit = false;
-    },
-    openModalSubmit() {
-      this.isOpenSubmit = true;
-    },
     closeModal() {
       this.isOpen = false;
     },

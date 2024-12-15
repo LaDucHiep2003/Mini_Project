@@ -21,6 +21,7 @@
   import {useRoute} from "vue-router";
   import {computed, onMounted, onUnmounted, ref} from "vue";
   import {getDetailExam} from "@/service/ExamService.js";
+  import {getResultDetail} from "@/service/ResultService.js";
 
   export  default {
     components:{
@@ -74,10 +75,10 @@
       };
 
       const loadExam = async () =>{
-        const result = await getDetailExam(id);
+        const result = await getResultDetail(id);
         if(result){
           data.value = result.data
-          data.value.duration = data.value.duration * 60;
+          console.log(result.data)
         }
       }
 
