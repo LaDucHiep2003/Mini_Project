@@ -58,9 +58,7 @@
               <div class="text-base">Bạn có muốn tạm dừng không?</div>
               <div class="flex justify-end items-center gap-2 mt-6">
                 <button @click="closeModal" class="w-[100px] h-9 bg-gray-300 rounded-lg text-base font-medium">Hủy</button>
-                <RouterLink to="/stop/1">
-                  <button class="w-[100px] h-9 bg-color-3 rounded-lg text-base font-medium text-white">Đồng ý</button>
-                </RouterLink>
+                <button @click="pauseExam" class="w-[100px] h-9 bg-color-3 rounded-lg text-base font-medium text-white">Đồng ý</button>
               </div>
             </div>
           </DialogPanel>
@@ -210,10 +208,23 @@ export default {
         await router.push(`/luyen-tap/ket-qua/${id_result}`);
       }
     }
+
+    const pauseExam = () =>{
+      props.stopTimer();
+      router.push({
+        name: "stop",
+        state: {
+          timeLeft: props.timer,
+          selectedAnswers: totalQuestions - props.selectedAnswers.blank_question,
+          blank_question: props.selectedAnswers.blank_question,
+        },
+      })
+    }
     return {
       scrollToQuestion,
       handleSubmit,
-      data
+      data,
+      pauseExam
     };
   },
 
@@ -230,6 +241,7 @@ export default {
     openModal() {
       this.isOpen = true;
     },
+
   },
 };
 </script>

@@ -59,7 +59,7 @@ const routes = [
               name : 'lam-bai-thi'
           },
           {
-              path: 'stop/:id',
+              path: 'stop',
               component: TamDung,
               name : 'stop'
           },

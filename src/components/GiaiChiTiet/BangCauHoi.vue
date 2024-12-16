@@ -6,7 +6,7 @@
 
     <div>
       <div class="flex gap-2 flex-wrap px-2 mt-3 max-h-52 overflow-scroll scroll-w-none">
-        <div v-for="(i, index) in data" @click="scrollToQuestion(i)"
+        <div v-for="(i, index) in data" @click="scrollToQuestion(index+1)"
              :class="['w-7 h-7 flex justify-center items-center rounded-lg text-sm font-semibold cursor-pointer', selectedAnswers[i.id_ques] ? 'text-white bg-color-3' : 'bg-gray-200']">{{ index + 1 }}</div>
       </div>
       <div @click="openModal" class="border border-color-5 rounded-2xl mt-3 py-1 cursor-pointer">
@@ -55,9 +55,7 @@
               <div class="text-base">Bạn có muốn thoát không?</div>
               <div class="flex justify-end items-center gap-2 mt-6">
                 <button @click="closeModal" class="w-[100px] h-9 bg-gray-300 rounded-lg text-base font-medium">Hủy</button>
-                <RouterLink to="/stop/1">
-                  <button class="w-[100px] h-9 bg-color-3 rounded-lg text-base font-medium text-white">Đồng ý</button>
-                </RouterLink>
+                <button @click="handleExit" class="w-[100px] h-9 bg-color-3 rounded-lg text-base font-medium text-white">Đồng ý</button>
               </div>
             </div>
           </DialogPanel>
@@ -113,13 +111,11 @@ export default {
     const router = useRouter();
     const id = route.params.id;
     let score_one_question = ref(0);
-    let totalQuestions = 0; // Tổng số câu hỏi
 
     // Hàm tải dữ liệu từ API
     const loadData = async () => {
       const result = await getQuestions(id);
       if (result) {
-        totalQuestions = result.questions.length;
         score_one_question.value = Math.round(10 / result.questions.length * 100) / 100;
         data.value = result.questions;
       }
@@ -131,33 +127,13 @@ export default {
         element.scrollIntoView({ behavior: "smooth", block: "center" });
       }
     };
-    const handleSubmit = async () =>{
-      props.selectedAnswers.correct_question = props.selectedAnswers.correct_question ?? 0;
-      props.selectedAnswers.incorrect_question = props.selectedAnswers.incorrect_question ?? 0;
-      props.selectedAnswers.blank_question = props.selectedAnswers.blank_question ?? totalQuestions;
-
-      const score = (props.selectedAnswers.correct_question / totalQuestions) * 10 ;
-      props.selectedAnswers.score = Number.isInteger(score) ? score : score.toFixed(2);
-
-      const result = await createResult({
-        id_user : 1,
-        id_exam : parseInt(id),
-        duration : props.timer,
-        details : props.selectedAnswers.details,
-        correct_question : props.selectedAnswers.correct_question,
-        incorrect_question : props.selectedAnswers.incorrect_question,
-        blank_question :  props.selectedAnswers.blank_question,
-        score : Number.isInteger(score) ? score : score.toFixed(2),
-      });
-      if(result){
-        const id_result = result.id_result;
-        await router.push(`/luyen-tap/ket-qua/${id_result}`);
-      }
+    const handleExit = () =>{
+      router.push(`/luyen-tap/ket-qua/${id}`)
     }
     return {
       scrollToQuestion,
-      handleSubmit,
-      data
+      data,
+      handleExit
     };
   },
 

@@ -10,13 +10,21 @@
         </div>
       </div>
       <div class="flex flex-col items-start mt-8">
-        <label v-for="(answer, answerIndex) in item.answerlist" :key="answerIndex" class="flex items-center mb-2 cursor-pointer text-lg hover:bg-color-7 w-full py-2 px-3 rounded-md relative">
-          <input type="radio" :name="`option-${item.id}`" :value="answer" class="hidden">
-          <span class="w-6 h-6 border-[3px] border-gray-300 rounded-lg flex items-center justify-center peer-checked:border-blue-500
+        <label v-for="(answer, answerIndex) in item.answerlist" :key="answerIndex" class="flex items-center mb-2 cursor-pointer text-lg w-full py-2 px-3 rounded-md relative">
+          <input type="radio" :name="`option-${item.id}`" :value="answer" class="hidden peer" :checked="item.correctAns === alphabet(answerIndex)">
+          <span class="w-6 h-6 border-[3px] border-gray-300 rounded-lg flex items-center justify-center peer-checked:bg-green-600 peer-checked:border-green-600
               transition-colors relative"></span>
-          <span class="w-2.5 h-2.5 bg-blue-500 rounded-full hidden absolute left-[19px]"></span>
-          <span class="ml-2 text-base font-medium">{{ alphabet(answerIndex) }}. {{ answer }}</span>
+          <div
+              class="items-center absolute left-[15px] justify-center rounded-full text-white hidden peer-checked:flex"
+          >
+            <i class="ri-check-line font-semibold"></i>
+          </div>
+          <span class="ml-2 text-base font-medium text-color-4">{{ alphabet(answerIndex) }}. {{ answer }}</span>
         </label>
+      </div>
+      <div class="text-start mt-3">
+        <div class="text-base text-color-3 font-semibold border-b border-color-4 pb-2">Giải thích </div>
+        <div class="mt-3 text-base border-b border-color-4 pb-10">Quan sát , đọc số liệu, liệt kê </div>
       </div>
     </div>
   </div>
