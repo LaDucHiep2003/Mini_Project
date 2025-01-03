@@ -46,7 +46,52 @@
                             </div>
                         </RouterLink>
                     </div>
-                  <div class="flex items-center justify-center">
+                  <div v-if="token" class="w-56 text-right">
+                    <Menu as="div" class="relative inline-block text-left">
+                      <div>
+                        <MenuButton
+                            class="inline-flex w-full justify-center  px-4 py-2 text-sm font-medium text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
+                        >
+                          <button class="flex justify-center items-center h-10 text-base font-semibold text-color-2 bg-white border border-color-2 rounded-md min-w-16 ">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2ZM12.1597 16C10.1243 16 8.29182 16.8687 7.01276 18.2556C8.38039 19.3474 10.114 20 12 20C13.9695 20 15.7727 19.2883 17.1666 18.1081C15.8956 16.8074 14.1219 16 12.1597 16ZM12 4C7.58172 4 4 7.58172 4 12C4 13.8106 4.6015 15.4807 5.61557 16.8214C7.25639 15.0841 9.58144 14 12.1597 14C14.6441 14 16.8933 15.0066 18.5218 16.6342C19.4526 15.3267 20 13.7273 20 12C20 7.58172 16.4183 4 12 4ZM12 5C14.2091 5 16 6.79086 16 9C16 11.2091 14.2091 13 12 13C9.79086 13 8 11.2091 8 9C8 6.79086 9.79086 5 12 5ZM12 7C10.8954 7 10 7.89543 10 9C10 10.1046 10.8954 11 12 11C13.1046 11 14 10.1046 14 9C14 7.89543 13.1046 7 12 7Z"></path></svg>
+                          </button>
+                        </MenuButton>
+                      </div>
+
+                      <transition
+                          enter-active-class="transition duration-100 ease-out"
+                          enter-from-class="transform scale-95 opacity-0"
+                          enter-to-class="transform scale-100 opacity-100"
+                          leave-active-class="transition duration-75 ease-in"
+                          leave-from-class="transform scale-100 opacity-100"
+                          leave-to-class="transform scale-95 opacity-0"
+                      >
+                        <MenuItems
+                            class="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none"
+                        >
+                          <div>
+                            <MenuItem v-slot="{ active }">
+                              <div class="py-[10px] px-4 text-color-5 font-normal hover:bg-bg-1">
+                                <v-icon name="fa-regular-user" scale="1.2" /> {{ infoUser.name}}
+                              </div>
+                            </MenuItem>
+                            <MenuItem v-slot="{ active }">
+                              <div class="py-[10px] px-4 text-color-5 font-normal hover:bg-bg-1">
+                                <v-icon name="fa-graduation-cap" scale="1.5" /> Kết quả học tập
+                              </div>
+                            </MenuItem>
+                            <MenuItem v-slot="{ active }">
+                              <div @click="handleLogout" class="py-[10px] px-4 text-color-5 font-normal hover:bg-bg-1">
+                                <v-icon name="fa-sign-out-alt" scale="1.2" /> Đăng xuất
+                              </div>
+                            </MenuItem>
+
+                          </div>
+                        </MenuItems>
+                      </transition>
+                    </Menu>
+                  </div>
+                  <div v-else class="flex items-center justify-center" >
                     <button @click="openModal" class="max-h-12 border border-color-2 text-color-2 font-semibold bg-white px-5 py-2 text-base
                       rounded-lg hover:bg-color-2 hover:text-white transition-all duration-300 max-xl:text-sm">Đăng nhập</button>
                   </div>
@@ -250,7 +295,8 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import {onMounted, ref} from 'vue'
+import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import {
   TransitionRoot,
   TransitionChild,
@@ -258,13 +304,16 @@ import {
   DialogPanel,
   DialogTitle,
 } from '@headlessui/vue'
-import {login, register} from "@/service/UserService.js";
+import {getUserToken, login, register} from "@/service/UserService.js";
 import Cookies from 'js-cookie';
+import {useRouter} from "vue-router";
 
 const isOpen = ref(false)
 const isOpenRegister = ref(false)
 const showDropdown = ref(false);
 const selectedOption = ref("");
+const router = useRouter();
+const infoUser = ref({});
 
 // Hàm xử lý chọn option
 const selectOption = (option) => {
@@ -272,6 +321,28 @@ const selectOption = (option) => {
   showDropdown.value = false;
 };
 const options = ref(["Giáo viên", "Học sinh"]);
+
+const token = Cookies.get("tokenStudent");
+
+const loadUser = async () =>{
+  try {
+    const response = await fetch('http://localhost:3000/user/token', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    if (response.ok) {
+      const data = await response.json();
+      infoUser.value = data.user
+    } else {
+      const error = await response.json();
+    }
+  } catch (error) {
+    console.error('Lỗi:', error);
+  }
+}
+onMounted(loadUser);
 
 const sendData = ref({
   name : '',
@@ -290,22 +361,29 @@ const dataLogin = ref({
 
 const handleLogin = async () =>{
   dataLogin.value.role = selectedOption.value;
-  console.log(dataLogin.value)
-
   const result = await login(dataLogin.value);
   if(result){
-    console.log(result)
-    Cookies.set("token",result.jwt);
+    const jwt = result.jwtStudent || result.jwtTeacher;
+    if(result.jwtStudent){
+      Cookies.set("tokenStudent", jwt);
+      isOpen.value = false;
+    }else if(result.jwtTeacher){
+      Cookies.set("tokenTeacher", jwt);
+      router.push({ name : 'dashboard'})
+    }
   }
 }
 const handleRegister = async () =>{
   sendData.value.role = selectedOption.value;
-  console.log(sendData.value)
-
   const result = await register(sendData.value);
   if(result){
+    isOpen.value = false;
     console.log("ok")
   }
+}
+
+const handleLogout = () =>{
+  Cookies.remove("tokenStudent");
 }
 
 function closeModal() {

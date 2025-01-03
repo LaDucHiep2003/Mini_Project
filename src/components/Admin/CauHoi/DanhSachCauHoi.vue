@@ -16,7 +16,7 @@
           <div class="flex justify-between mt-6 p-3 bg-color-6">
             <div class="text-sm font-semibold min-w-[70px]">Stt</div>
             <div class="text-sm font-semibold min-w-[23%]">Tiêu đề</div>
-            <div class="text-sm font-semibold min-w-[23%]">Môn học</div>
+            <div class="text-sm font-semibold min-w-[23%]">Danh mục</div>
             <div class="text-sm font-semibold min-w-[15%]">Câu trả lời</div>
             <div class="text-sm font-semibold min-w-[15%]">Đáp án</div>
             <div class="text-sm font-semibold min-w-[19%]">Hành động</div>
@@ -26,7 +26,7 @@
           <ul>
             <li v-for="(item, index) in listQuestion" :key="item.id" class="flex items-center py-3 text-sm border-b border-color-7 justify-between text-center">
               <div class="min-w-5 px-6 bg-custom_1">{{item.id}}</div>
-              <div class="flex justify-center items-center text-center h-12 ml-4 mr-[10px] min-w-[23%] w-2/12 line-clamp-3">{{ item.title}}</div>
+              <div class="flex justify-center items-center text-center ml-4 mr-[10px] min-w-[23%] line-clamp-3">{{ item.title}}</div>
               <div class="overflow-hidden line-clamp-1 overflow-ellipsis break-words text-center min-h-5 min-w-[23%]">{{ item.Subject}}</div>
               <div class="px-1 min-w-[15%] break-words text-sm">{{ item.correctAns }}</div>
               <div class="px-1 min-w-[15%] break-words text-sm">{{ item.answerlist }}</div>
@@ -115,6 +115,7 @@ export default {
       try {
         const result = await getQuestions(1);
         listQuestion.value = result.questions.data;
+        console.log(result)
       } catch (err) {
         console.log(err.message);
       }

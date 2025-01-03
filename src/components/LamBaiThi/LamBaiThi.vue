@@ -2,7 +2,6 @@
 <template>
   <div class="container mx-auto mb-10">
     <div class="text-center mt-10 relative">
-      <div class="text-2xl font-bold">{{ data.title }}</div>
       <div class="flex gap-3 mt-6 justify-center items-center">
         <v-icon name="fa-regular-clock" scale="1.5" class="text-gray-500" />
         <div class="text-sm font-bold text-green-500">{{ formattedTime }}</div>
@@ -56,7 +55,7 @@
 
         data.forEach((question) => {
           const selectedAnswer = selectedAnswers.value.details.find(
-              (item) => item.id_question === question.id
+              (item) => item.id_question === question.id_ques
           )?.answer;
           if (selectedAnswer) {
             // So sánh với đáp án đúng

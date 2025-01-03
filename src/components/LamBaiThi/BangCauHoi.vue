@@ -6,8 +6,8 @@
 
     <div>
       <div class="flex gap-2 flex-wrap px-2 mt-3 max-h-52 overflow-scroll scroll-w-none">
-        <div v-for="(i, index) in data" @click="scrollToQuestion(i)"
-             :class="['w-7 h-7 flex justify-center items-center rounded-lg text-sm font-semibold cursor-pointer', selectedAnswers[i.id_ques] ? 'text-white bg-color-3' : 'bg-gray-200']">{{ index + 1 }}</div>
+        <div v-for="(i, index) in data" @click="scrollToQuestion(index)"
+             :class="['w-7 h-7 flex justify-center items-center rounded-lg text-sm font-semibold cursor-pointer', isSelected(i) ? 'text-white bg-color-3' : 'bg-gray-200']">{{ index + 1 }}</div>
       </div>
       <div @click="openModal" class="border border-color-5 rounded-2xl mt-3 py-1 cursor-pointer">
         <button class="text-[15px] text-color-4 font-semibold">Tạm dừng</button>
@@ -172,6 +172,7 @@ export default {
     const loadData = async () => {
       const result = await getQuestioninExam(id);
       if (result) {
+        console.log(result.questions)
         totalQuestions = result.questions.length;
         score_one_question.value = Math.round(10 / result.questions.length * 100) / 100;
         data.value = result.questions;
@@ -193,7 +194,21 @@ export default {
       const score = (props.selectedAnswers.correct_question / totalQuestions) * 10 ;
       props.selectedAnswers.score = Number.isInteger(score) ? score : score.toFixed(2);
 
-      const result = await createResult({
+      // const result = await createResult({
+      //   id_user : 1,
+      //   id_exam : parseInt(id),
+      //   duration : props.timer,
+      //   details : props.selectedAnswers.details,
+      //   correct_question : props.selectedAnswers.correct_question,
+      //   incorrect_question : props.selectedAnswers.incorrect_question,
+      //   blank_question :  props.selectedAnswers.blank_question,
+      //   score : Number.isInteger(score) ? score : score.toFixed(2),
+      // });
+      // if(result){
+      //   const id_result = result.id_result;
+      //   await router.push(`/luyen-tap/ket-qua/${id_result}`);
+      // }
+      console.log({
         id_user : 1,
         id_exam : parseInt(id),
         duration : props.timer,
@@ -202,11 +217,7 @@ export default {
         incorrect_question : props.selectedAnswers.incorrect_question,
         blank_question :  props.selectedAnswers.blank_question,
         score : Number.isInteger(score) ? score : score.toFixed(2),
-      });
-      if(result){
-        const id_result = result.id_result;
-        await router.push(`/luyen-tap/ket-qua/${id_result}`);
-      }
+      })
     }
 
     const pauseExam = () =>{
@@ -220,11 +231,18 @@ export default {
         },
       })
     }
+    const isSelected = (question) => {
+      return props.selectedAnswers.details?.some(
+          (answer) => answer.id_question === question.id_ques
+      );
+    }
+
     return {
       scrollToQuestion,
       handleSubmit,
       data,
-      pauseExam
+      pauseExam,
+      isSelected
     };
   },
 

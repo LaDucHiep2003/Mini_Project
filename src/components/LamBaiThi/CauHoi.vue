@@ -42,12 +42,11 @@ export default {
     const loadData = async () => {
       const result = await getQuestioninExam(id);
       if (result) {
+        console.log(result.questions)
         data.value = result.questions.map((question) => ({
           ...question,
           // Chuyển đổi answerlist từ chuỗi không hợp lệ thành mảng hợp lệ
-          answerlist: question.answerlist
-              .replace(/[\[\]\s]/g, "") // Loại bỏ dấu ngoặc vuông và khoảng trắng
-              .split(","),             // Tách chuỗi thành mảng
+          answerlist: JSON.parse(question.answerlist),
         }));
       }
     };

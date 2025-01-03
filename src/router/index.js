@@ -22,6 +22,7 @@ import UocLuongNangLucTS from "@/pages/Admin/UocLuongNangLucTS.vue";
 import DanhGiaCauHoi from "@/pages/Admin/DanhGiaCauHoi.vue";
 import LayoutBaiThi from "@/components/LamBaiThi/LayoutBaiThi.vue";
 import GiaiChiTiet from "@/pages/GiaiChiTiet/GiaiChiTiet.vue";
+import Cookies from "js-cookie";
 const routes = [
     {
       path: "/",
@@ -158,5 +159,13 @@ const router = createRouter({
       }
     },
   });
+router.beforeEach((to, from, next) => {
+    const adminToken = Cookies.get('tokenTeacher')
+    if (to.path.startsWith('/admin') && !adminToken) {
+        next({ name: 'Home' })
+    } else {
+        next()
+    }
+})
   
   export default router;
